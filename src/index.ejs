@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<!--
+This is the default template that the outputed index.html will have. The link and script tags are going to be
+autopopulated after running "npm run build" so no need to include them here. This template will not ever change
+dynamically so only include persisting stuff like meta, external links, titles etc.
+-->
+
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Django React SPA</title>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <!--
+    This ensures that the proper manifest JS file is loaded as inline,
+    in order to avoid unnecessary re-fetching of cached scripts when Webpack generates the versioning hashes
+    -->
+    <%=htmlWebpackPlugin.files.webpackManifest%>
+  </body>
+
+</html>
