@@ -27,7 +27,7 @@ FilterListItem.propTypes = {
 
 function FiltersList() {
   return (
-    <Cell col={12} className="mdl-color-text--grey-600">
+    <div className="mdl-color-text--grey-600">
       <FilterListItem title="Result calculation period">
         <Cell col={8} tablet={12} phone={12} className="center-block" style={{ marginBottom: 20 }}>
           <PeriodFilter />
@@ -38,7 +38,7 @@ function FiltersList() {
           <AdvancedFilters />
         </Cell>
       </FilterListItem>
-    </Cell>
+    </div>
   );
 }
 

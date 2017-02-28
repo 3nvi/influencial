@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Cell } from 'react-mdl';
 import '../../lib/amcharts/index';
 
 class Map extends Component {
@@ -94,7 +95,15 @@ class Map extends Component {
   }
 
   render() {
-    return <div id="influencer-map" style={{ width: '100%', height: '400px' }} />;
+    return (
+      <Cell
+        col={12}
+        className="mdl-shadow--2dp"
+        style={{ padding: '15px', background: 'white', marginBottom: '30px' }}
+      >
+        <div id="influencer-map" style={{ width: '100%', height: '400px' }} />
+      </Cell>
+    );
   }
 }
 
