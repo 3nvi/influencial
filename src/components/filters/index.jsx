@@ -1,7 +1,7 @@
 import React from 'react';
 import { Cell } from 'react-mdl';
 
-import PeriodFilter from './period_filter';
+import PeriodFilter from '../../containers/filters/period_filter';
 import AdvancedFilters from './advanced_filters';
 
 function FilterListItem({ title, children }) {

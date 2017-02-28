@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 
 import { toggleFilter } from '../../actions/index';
 import { TOGGLE_TOPIC_FILTER } from '../../actions/types';
-import CheckboxFilter from './checkbox_filter_item';
-import CollapsibleFilterItem from './common';
+import CheckboxFilter from '../../components/filters/checkbox_filter_item';
+import CollapsibleFilterItem from '../../components/filters/common';
 
 class TopicFilters extends Component {
 
@@ -21,7 +21,7 @@ class TopicFilters extends Component {
 
   renderCheckboxList(topics) {
     return Object.keys(topics || {}).map((topic) => {
-      const checked = topics[topic]
+      const checked = topics[topic];
       return (
         <CheckboxFilter
           key={topic}
