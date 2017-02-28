@@ -2,8 +2,8 @@ import React from 'react';
 import { Layout, Grid, Cell, Navigation, Header } from 'react-mdl';
 import { Link } from 'react-router';
 
-import Map from '../containers/map/index';
-import Filters from '../containers/filters/index';
+import Map from './map/index';
+import Filters from './filters/index';
 import InfluencerList from '../containers/influencers/list';
 
 function Home() {

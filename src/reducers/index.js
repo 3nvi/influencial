@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-
-/* Any additional reducers should be combined here */
+import filtersReducer from './filters_reducer';
 
 export default combineReducers({
-  form: formReducer
+  form: formReducer,
+  filters: filtersReducer
 });

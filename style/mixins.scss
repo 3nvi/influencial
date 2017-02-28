@@ -3,3 +3,12 @@
   margin-right: auto;
   display: block;
 }
+
+.center-block {
+  @include center-block;
+}
+
+.center-items {
+  align-items: center;
+  justify-content: center;
+}

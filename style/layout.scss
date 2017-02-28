@@ -1,7 +1,13 @@
 html > body {
-  font-family: 'Roboto','Helvetica','Arial',sans-serif;
   background-color: $grayLight;
-  font-size: 16px;
+
+  &, ul, ol, .mdl-textfield__input {
+    font-size: 16px;
+  }
+
+  &, input, textarea, button, select, div, span, * {
+    font-family: 'Roboto','Helvetica','Arial',sans-serif !important;
+  }
 
   /* grid breakpoints & media */
   .container .mdl-grid {
@@ -30,5 +36,10 @@ html > body {
       padding: 30px 15px;
     }
   }
+}
 
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
 }

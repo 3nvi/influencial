@@ -1,0 +1,69 @@
+.mdl-option.mdl-option--selected {
+  color: black;
+  font-weight: bold;
+}
+
+.mdl-selectfield {
+  width: 100%;
+  max-width: 300px;
+  font-size: 16px;
+}
+
+.collapsible-filter__control {
+  text-transform: uppercase;
+  outline: none !important;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 500;
+  text-align: center;
+  height: 46px;
+  padding: 8px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-left: none;
+  border-right: none;
+}
+
+.collapsible-filter.closed .collapsible-filter__control {
+  color: inherit;
+  background: inherit;
+
+  &:hover {
+    background: #fcfcfc;
+    color: #666;
+  }
+}
+
+.collapsible-filter:not(.closed) .collapsible-filter__control {
+  background: #f7f7f7;
+  font-weight: 700;
+  color: #666;
+
+  &:hover {
+    background: #f3f3f3;
+  }
+}
+
+.collapsible-filter__item {
+  overflow-y: hidden;
+  max-height: 500px;
+  padding: 10% 15%;
+
+  transition-property: all;
+  transition-duration: .5s;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+
+  & label {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+
+  & label * {
+    color: #666;
+  }
+}
+
+.collapsible-filter.closed .collapsible-filter__item {
+  max-height: 0;
+}
+

@@ -1,1 +1,8 @@
-/* Define all action creators here */
+
+export function toggleFilter(type, payload) {
+  return {
+    type,
+    payload
+  };
+}
+
