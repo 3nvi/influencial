@@ -1,8 +1,9 @@
 import React from 'react';
 import { Cell } from 'react-mdl';
+import TopicFilters from '../../containers/filters/topic_filters';
+import GenderFilters from '../../containers/filters/gender_filters';
 
-import PeriodFilter from '../../containers/filters/period_filter';
-import AdvancedFilters from './advanced_filters';
+import PeriodFilter from '../../containers/filters/period_filters';
 
 function FilterListItem({ title, children }) {
   return (
@@ -28,14 +29,15 @@ FilterListItem.propTypes = {
 function FiltersList() {
   return (
     <div className="mdl-color-text--grey-600">
-      <FilterListItem title="Result calculation period">
+      <FilterListItem title="Calculate based on">
         <Cell col={8} tablet={12} phone={12} className="center-block" style={{ marginBottom: 20 }}>
           <PeriodFilter />
         </Cell>
       </FilterListItem>
       <FilterListItem title="Advanced filters">
         <Cell col={12} className="center-block" style={{ marginBottom: 20 }}>
-          <AdvancedFilters />
+          <TopicFilters />
+          {/*<GenderFilters />*/}
         </Cell>
       </FilterListItem>
     </div>
