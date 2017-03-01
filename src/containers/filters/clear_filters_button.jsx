@@ -2,12 +2,13 @@ import { Button } from 'react-mdl';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import IsCustomFiltered from '../../selectors/is_custom_filtered';
 
 import { clearFilters } from '../../actions/index';
 
 class ClearFiltersButton extends Component {
   render() {
-    if (this.props.isCustomFiltered) {
+    if (!this.props.isCustomFiltered) {
       return false;
     }
 
@@ -31,10 +32,7 @@ ClearFiltersButton.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return {
-    isCustomFiltered: (state.filters.q !== '')
-    /* need to calculate whether button is visible or not. Use reselect */
-  };
+  return { isCustomFiltered: IsCustomFiltered(state) };
 }
 
 function mapDispatchToProps(dispatch) {
