@@ -1,7 +1,7 @@
 import { TOGGLE_TOPIC_FILTER } from '../../actions/types';
-import GenericCheckboxReducer from './templates/generic_checkbox_reducer';
+import GenericMultipleValueMultipleReducer from './templates/generic_multiple_value_multiple_reducer';
 
-export default GenericCheckboxReducer({
+export default GenericMultipleValueMultipleReducer({
   shoes: true,
   bags: true,
   scissors: true

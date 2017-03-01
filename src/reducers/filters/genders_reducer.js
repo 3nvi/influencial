@@ -1,7 +1,7 @@
 import { TOGGLE_GENDER_FILTER } from '../../actions/types';
-import GenericRadioReducer from './templates/generic_radio_reducer';
+import GenericSingleValueMultipleReducer from './templates/generic_single_value_multiple_reducer';
 
-export default GenericRadioReducer({
+export default GenericSingleValueMultipleReducer({
   both: true,
   male: false,
   female: false
