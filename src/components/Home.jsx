@@ -3,8 +3,9 @@ import { Layout, Grid, Cell, Navigation, Header } from 'react-mdl';
 import { Link } from 'react-router';
 
 import Map from './map/index';
-import Filters from './filters/index';
+import AdvancedFilters from './filters/index';
 import InfluencerList from '../containers/influencers/list';
+import FreeSearchFilter from '../containers/filters/free_search_filter';
 
 function Home() {
   return (
@@ -18,12 +19,24 @@ function Home() {
         <Cell col={12}>
           <Map />
         </Cell>
-        <Cell col={4}>
-          <Filters />
-        </Cell>
-        <Cell col={8}>
-          <InfluencerList />
-        </Cell>
+        <Grid>
+          <Cell col={4}>
+            <AdvancedFilters />
+          </Cell>
+          <Cell col={8}>
+            <Cell
+              col={12}
+              shadow={0}
+              className="center-block"
+              style={{ marginBottom: 30, padding: '5px 30px', background: 'white' }}
+            >
+              <FreeSearchFilter />
+            </Cell>
+            {/*<Cell col={12} shadow={0} className="center-block" style={{ marginBottom: 20 }}>*/}
+              {/*<InfluencerList />*/}
+            {/*</Cell>*/}
+          </Cell>
+        </Grid>
       </Grid>
     </Layout>
   );

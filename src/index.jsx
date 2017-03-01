@@ -13,7 +13,7 @@ import '../style/index.scss';
 
 function App() {
   const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
-
+  window.store = store;
   return (
     <Provider store={store}>
       <Routes />
