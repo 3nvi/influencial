@@ -39,7 +39,7 @@ class GenericSelectFilter extends Component {
         selectedValue = item; // only one value is gonna be True
       }
     });
-    
+
     return (
       <SelectField
         label={this.props.title}

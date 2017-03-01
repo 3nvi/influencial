@@ -24,7 +24,7 @@ class FreeSearchFilter extends Component {
         value={this.props.q}
         onChange={this.handleChange}
         floatingLabel
-        label="Search for specific influencers"
+        label="Search for specific influencers..."
         style={{ width: '100%' }}
       />
     );

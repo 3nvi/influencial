@@ -19,24 +19,22 @@ function Home() {
         <Cell col={12}>
           <Map />
         </Cell>
-        <Grid>
-          <Cell col={4}>
-            <AdvancedFilters />
+        <Cell col={4}>
+          <AdvancedFilters />
+        </Cell>
+        <Cell col={8}>
+          <Cell
+            col={12}
+            shadow={0}
+            className="center-block"
+            style={{ marginBottom: 30, padding: '5px 30px', background: 'white' }}
+          >
+            <FreeSearchFilter />
           </Cell>
-          <Cell col={8}>
-            <Cell
-              col={12}
-              shadow={0}
-              className="center-block"
-              style={{ marginBottom: 30, padding: '5px 30px', background: 'white' }}
-            >
-              <FreeSearchFilter />
-            </Cell>
-            {/*<Cell col={12} shadow={0} className="center-block" style={{ marginBottom: 20 }}>*/}
-              {/*<InfluencerList />*/}
-            {/*</Cell>*/}
-          </Cell>
-        </Grid>
+          {/*<Cell col={12} shadow={0} className="center-block" style={{ marginBottom: 20 }}>*/}
+            {/*<InfluencerList />*/}
+          {/*</Cell>*/}
+        </Cell>
       </Grid>
     </Layout>
   );

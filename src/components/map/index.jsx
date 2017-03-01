@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import { Cell } from 'react-mdl';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import '../../lib/amcharts/index';
+import { toggleFilter } from '../../actions/index';
+import {
+  ADD_LOCATION_FILTER,
+  REMOVE_LOCATION_FILTER
+} from '../../actions/types';
+
 
 class Map extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onMapObjectClick = this.onMapObjectClick.bind(this);
+  }
+  
   componentDidMount() {
     AmCharts.makeChart('influencer-map', {
 
@@ -71,7 +86,10 @@ class Map extends Component {
     area.showAsSelected = !area.showAsSelected;
     chart.returnInitialColor(area);
 
-    // call this.props.updateFilters() action creator. Country is in: mapObject.id
+    this.props.toggleFilter(
+      ((area.showAsSelected) ? ADD_LOCATION_FILTER : REMOVE_LOCATION_FILTER),
+      mapObject.id
+    );
   }
 
   calculateInfluencerHeatMap(event) {
@@ -99,7 +117,7 @@ class Map extends Component {
       <Cell
         col={12}
         className="mdl-shadow--2dp"
-        style={{ padding: '15px', background: 'white', marginBottom: '30px' }}
+        style={{ padding: '15px', background: 'white' }}
       >
         <div id="influencer-map" style={{ width: '100%', height: '400px' }} />
       </Cell>
@@ -107,4 +125,15 @@ class Map extends Component {
   }
 }
 
-export default Map;
+
+function mapStateToProps(state) {
+  return {
+    locations: state.filters.locations
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ toggleFilter }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map);
