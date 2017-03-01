@@ -27,7 +27,7 @@ class GenericRadioFilters extends Component {
 
   renderRadioList(items) {
     if (!items) {
-      return undefined;
+      return false;
     }
 
     const itemKeys = Object.keys(items);

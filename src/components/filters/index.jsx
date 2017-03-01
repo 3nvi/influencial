@@ -1,5 +1,6 @@
 import React from 'react';
 import { Cell } from 'react-mdl';
+import ClearFiltersButton from '../../containers/filters/clear_filters_button';
 import TopicFilters from '../../containers/filters/topic_filters';
 import GenderFilters from '../../containers/filters/gender_filters';
 import PeriodFilters from '../../containers/filters/period_filters';
@@ -34,6 +35,7 @@ function FiltersList() {
       </FilterListItem>
       <FilterListItem title="Advanced filters">
         <Cell col={12} className="center-block" style={{ marginBottom: 20 }}>
+          <ClearFiltersButton />
           <TopicFilters />
           <GenderFilters />
           <ServiceFilters />
