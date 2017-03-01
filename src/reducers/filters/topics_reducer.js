@@ -1,16 +1,9 @@
 import { TOGGLE_TOPIC_FILTER } from '../../actions/types';
+import GenericCheckboxReducer from './templates/generic_checkbox_reducer';
 
-const initialState = {
+export default GenericCheckboxReducer({
   shoes: true,
   bags: false,
   scissors: true
-};
+}, TOGGLE_TOPIC_FILTER);
 
-export default function (state = initialState, action) {
-  switch (action.type) {
-    case TOGGLE_TOPIC_FILTER:
-      return { ...state, [action.payload.name]: action.payload.value };
-    default:
-      return state;
-  }
-}

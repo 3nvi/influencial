@@ -2,8 +2,8 @@ import React from 'react';
 import { Cell } from 'react-mdl';
 import TopicFilters from '../../containers/filters/topic_filters';
 import GenderFilters from '../../containers/filters/gender_filters';
-
-import PeriodFilter from '../../containers/filters/period_filters';
+import PeriodFilters from '../../containers/filters/period_filters';
+import ServiceFilters from '../../containers/filters/services_filters';
 
 function FilterListItem({ title, children }) {
   return (
@@ -13,9 +13,7 @@ function FilterListItem({ title, children }) {
       className="mdl-typography--text-center mdl-color--white clearfix"
       style={{ marginBottom: '30px' }}
     >
-      <h4>
-        {title}
-      </h4>
+      <h4>{title}</h4>
       {children}
     </Cell>
   );
@@ -31,13 +29,14 @@ function FiltersList() {
     <div className="mdl-color-text--grey-600">
       <FilterListItem title="Calculate based on">
         <Cell col={8} tablet={12} phone={12} className="center-block" style={{ marginBottom: 20 }}>
-          <PeriodFilter />
+          <PeriodFilters />
         </Cell>
       </FilterListItem>
       <FilterListItem title="Advanced filters">
         <Cell col={12} className="center-block" style={{ marginBottom: 20 }}>
           <TopicFilters />
-          {/*<GenderFilters />*/}
+          <GenderFilters />
+          <ServiceFilters />
         </Cell>
       </FilterListItem>
     </div>

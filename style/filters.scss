@@ -47,23 +47,29 @@
 .collapsible-filter__item {
   overflow-y: hidden;
   max-height: 500px;
-  padding: 10% 15%;
+  padding: 7.5% 15%;
 
   transition-property: all;
   transition-duration: .5s;
   transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 
-  & label {
+  label {
     margin-bottom: 15px;
     text-align: left;
   }
 
-  & label * {
+  label * {
     color: #666;
+  }
+
+  [class$="__label"] {
+    text-transform: capitalize;
   }
 }
 
 .collapsible-filter.closed .collapsible-filter__item {
   max-height: 0;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
