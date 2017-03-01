@@ -17,9 +17,9 @@ class Map extends Component {
 
     this.onMapObjectClick = this.onMapObjectClick.bind(this);
   }
-  
+
   componentDidMount() {
-    AmCharts.makeChart('influencer-map', {
+    this.map = AmCharts.makeChart('influencer-map', {
 
       type: 'map',
       theme: 'light',
@@ -68,26 +68,28 @@ class Map extends Component {
         }
       ]
     });
+
+    window.map = this.map;
   }
 
   shouldComponentUpdate() {
     return false;
   }
 
+  // Ignore any click not on area
   onMapObjectClick({ chart, mapObject }) {
-
-    // Ignore any click not on area
     if (mapObject.objectType !== 'MapArea') {
       return;
     }
 
-    // Toggle showAsSelected
+    // toggle Selected area
     const area = mapObject;
     area.showAsSelected = !area.showAsSelected;
-    chart.returnInitialColor(area);
+    this.map.returnInitialColor(area);
 
+    // inform the store
     this.props.toggleFilter(
-      ((area.showAsSelected) ? ADD_LOCATION_FILTER : REMOVE_LOCATION_FILTER),
+      ((mapObject.showAsSelected) ? ADD_LOCATION_FILTER : REMOVE_LOCATION_FILTER),
       mapObject.id
     );
   }
@@ -125,6 +127,10 @@ class Map extends Component {
   }
 }
 
+Map.propTypes = {
+  toggleFilter: React.PropTypes.func.isRequired,
+  locations: React.PropTypes.arrayOf(React.PropTypes.string)
+};
 
 function mapStateToProps(state) {
   return {
