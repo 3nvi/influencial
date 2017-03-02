@@ -11,9 +11,8 @@ const locationsSelector = state => state.filters.locations;
 const qSelector = state => state.filters.q;
 
 const evalFiltered = (topics, genders, services, periods, locations, q) => !(
-       (genders == initialGenderState)
+       (genders === initialGenderState)
     && (services === initialServiceState)
-    && !q
     && (periods === initialPeriodState)
     && !locations.length
     && Object.values(topics).reduce((a, b) => a && b)

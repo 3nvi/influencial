@@ -1,9 +1,21 @@
-import { TOGGLE_TOPIC_FILTER } from '../../actions/types';
-import GenericMultipleValueMultipleReducer from './templates/generic_multiple_value_multiple_reducer';
+import {
+  TOGGLE_TOPIC_FILTER,
+  CLEAR_FILTERS
+} from '../../actions/types';
 
-export default GenericMultipleValueMultipleReducer({
+export const initialTopicState = {
   shoes: true,
   bags: true,
   scissors: true
-}, TOGGLE_TOPIC_FILTER);
+};
 
+export default (state = initialTopicState, action) => {
+  switch (action.type) {
+    case TOGGLE_TOPIC_FILTER:
+      return { ...state, [action.payload.name]: action.payload.value };
+    case CLEAR_FILTERS:
+      return initialTopicState;
+    default:
+      return state;
+  }
+};
