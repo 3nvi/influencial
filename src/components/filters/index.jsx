@@ -1,10 +1,10 @@
 import React from 'react';
 import { Cell } from 'react-mdl';
-import ClearFiltersButton from '../../containers/filters/clear_filters_button';
 import TopicFilters from '../../containers/filters/topic_filters';
 import GenderFilters from '../../containers/filters/gender_filters';
 import PeriodFilters from '../../containers/filters/periods_filters';
 import ServiceFilters from '../../containers/filters/services_filters';
+import AlgorithmFilter from '../../containers/filters/algorithm_filters';
 
 function FilterListItem({ title, children }) {
   return (
@@ -28,9 +28,13 @@ FilterListItem.propTypes = {
 function FiltersList() {
   return (
     <div className="mdl-color-text--grey-600">
+      <FilterListItem title="Advanced Settings">
+        <Cell col={12} className="center-block" style={{ marginBottom: 20 }}>
+          <AlgorithmFilter />
+        </Cell>
+      </FilterListItem>
       <FilterListItem title="Advanced filters">
         <Cell col={12} className="center-block" style={{ marginBottom: 20 }}>
-          <ClearFiltersButton />
           <PeriodFilters />
           <TopicFilters />
           <GenderFilters />

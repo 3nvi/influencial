@@ -4,6 +4,14 @@
   display: block;
 }
 
+@mixin transition-all($s) {
+  -webkit-transition: all #{$s}s ease-in-out;
+  -moz-transition: all #{$s}s ease-in-out;
+  -ms-transition: all #{$s}s ease-in-out;
+  -o-transition: all #{$s}s ease-in-out;
+  transition: all #{$s}s ease-in-out;
+}
+
 .center-block {
   @include center-block;
 }

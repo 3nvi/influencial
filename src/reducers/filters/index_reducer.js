@@ -4,6 +4,7 @@ import genders from './genders_reducer';
 import services from './services_reducer';
 import periods from './periods_reducer';
 import locations from './locations_reducer';
+import algorithm from './algorithm_reducer';
 import q from './free_search_reducer';
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
   services,
   periods,
   locations,
+  algorithm,
   q
 });

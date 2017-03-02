@@ -3,33 +3,53 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import IsCustomFiltered from '../../selectors/is_custom_filtered';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { clearFilters } from '../../actions/index';
 
-class ClearFiltersButton extends Component {
-  render() {
+class ClearFilters extends Component {
+
+  renderNotification() {
     if (!this.props.isCustomFiltered) {
       return false;
     }
-
     return (
-      <Button
-        className="center-block mdl-typography--text-center"
-        raised
-        colored
-        ripple
-        style={{ marginTop: '15px', marginBottom: '15px' }}
-        onClick={this.props.clearFilters}
+      <div className="notification--fixed mdl-shadow--2dp">
+        <p>
+          <span>Got lost with all these filters?</span>
+          <Button
+            className="center-block mdl-typography--text-center"
+            raised
+            ripple
+            colored
+            style={{ marginLeft: '15px' }}
+            onClick={this.props.clearFilters}
+          >
+            Clear
+          </Button>
+        </p>
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <ReactCSSTransitionGroup
+        transitionName="slide"
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={500}
       >
-        Reset
-      </Button>
+        {this.renderNotification()}
+      </ReactCSSTransitionGroup>
     );
   }
 }
 
-ClearFiltersButton.propTypes = {
-  isCustomFiltered: React.PropTypes.bool.isRequired
+ClearFilters.propTypes = {
+  isCustomFiltered: React.PropTypes.bool.isRequired,
+  clearFilters: React.PropTypes.func.isRequired
 };
+
 
 function mapStateToProps(state) {
   return { isCustomFiltered: IsCustomFiltered(state) };
@@ -39,4 +59,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ clearFilters }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ClearFiltersButton);
+export default connect(mapStateToProps, mapDispatchToProps)(ClearFilters);

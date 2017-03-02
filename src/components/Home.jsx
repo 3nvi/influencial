@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout, Grid, Cell, Navigation, Header } from 'react-mdl';
 import { Link } from 'react-router';
+import ClearFilters from '../containers/filters/clear_filters_button';
 
 import Map from './map/index';
 import AdvancedFilters from './filters/index';
@@ -16,6 +17,7 @@ function Home() {
         </Navigation>
       </Header>
       <Grid>
+        <ClearFilters />
         <Cell col={12}>
           <Map />
         </Cell>

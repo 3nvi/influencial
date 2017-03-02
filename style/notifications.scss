@@ -1,0 +1,37 @@
+.notification--fixed {
+  @include transition-all(.5);
+
+  position: fixed;
+  z-index: 1090;
+  min-width: 300px;
+  bottom: 15px;
+  right: 15px;
+
+  background: rgba(255, 255, 255, 0.75);
+  padding: 30px;
+
+  p {
+    margin: 0;
+  }
+
+  button {
+    display: inline-block;
+  }
+}
+
+.notification--fixed:hover {
+  background: white;
+}
+
+.notification--fixed.slide-enter {
+  right: -25%;
+}
+
+.notification--fixed.slide-enter-active,
+.notification--fixed.slide-leave {
+  right: 30px;
+}
+
+.notification--fixed.slide-leave-active {
+  right: -50%;
+}
