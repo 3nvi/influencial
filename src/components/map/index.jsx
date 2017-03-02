@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Cell } from 'react-mdl';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import _ from 'lodash';
 
 import '../../lib/amcharts/index';
 import { toggleFilter } from '../../actions/index';
@@ -76,20 +77,23 @@ class Map extends Component {
     return false;
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.map.svgAreas.forEach((area) => {
+      const mapObject = this.map.getObjectById(area.id);
+      mapObject.showAsSelected = _.includes(nextProps.locations, area.id);
+      this.map.returnInitialColor(mapObject);
+    });
+  }
+
   // Ignore any click not on area
-  onMapObjectClick({ chart, mapObject }) {
+  onMapObjectClick({ mapObject }) {
     if (mapObject.objectType !== 'MapArea') {
       return;
     }
 
-    // toggle Selected area
-    const area = mapObject;
-    area.showAsSelected = !area.showAsSelected;
-    this.map.returnInitialColor(area);
-
     // inform the store
     this.props.toggleFilter(
-      ((mapObject.showAsSelected) ? ADD_LOCATION_FILTER : REMOVE_LOCATION_FILTER),
+      ((mapObject.showAsSelected) ? REMOVE_LOCATION_FILTER : ADD_LOCATION_FILTER),
       mapObject.id
     );
   }
