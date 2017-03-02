@@ -28,22 +28,14 @@ class GenericSelectFilter extends Component {
       return false;
     }
 
-    const itemKeys = Object.keys(items);
-    let selectedValue = itemKeys[0];
-    const selectOptions = itemKeys.map((item) => {
+    const selectOptions = this.props.items.map((item) => {
       return <Option value={item} key={item}>{item.split('-').join(' ')}</Option>;
-    });
-
-    itemKeys.forEach((item) => {
-      if (items[item]) {
-        selectedValue = item; // only one value is gonna be True
-      }
     });
 
     return (
       <SelectField
         label={this.props.title}
-        value={selectedValue}
+        value={this.props.selectedItem}
         className="center-block"
         floatingLabel
         onChange={this.handleOnChange}
@@ -60,15 +52,16 @@ class GenericSelectFilter extends Component {
 
 GenericSelectFilter.propTypes = {
   title: React.PropTypes.string.isRequired,
-  items: React.PropTypes.objectOf(React.PropTypes.bool).isRequired,
+  items: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   toggleFilter: React.PropTypes.func.isRequired,
   actionType: React.PropTypes.string.isRequired,
-  itemsStateName: React.PropTypes.string.isRequired
+  itemsStateName: React.PropTypes.string.isRequired,
+  selectedItem: React.PropTypes.string.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    items: state.filters[ownProps.itemsStateName]
+    selectedItem: state.filters[ownProps.itemsStateName]
   };
 }
 

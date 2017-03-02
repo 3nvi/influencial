@@ -30,29 +30,25 @@ class GenericRadioFilters extends Component {
       return false;
     }
 
-    const itemKeys = Object.keys(items);
-    let selectedValue = itemKeys[0];
-    const radioListItems = itemKeys.map((item) => {
-      return <Radio value={item} key={item} ripple >{item.split('-').join(' ')}</Radio>;
-    });
-
-    itemKeys.forEach((item) => {
-      if (items[item]) {
-        selectedValue = item; // only one value is gonna be True
-      }
+    const radioListItems = this.props.items.map((itemName) => {
+      return (
+        <Radio value={itemName} key={itemName} ripple>
+          {itemName.split('-').join(' ')}
+        </Radio>
+      );
     });
 
     return (
       <RadioGroup
         style={{ textAlign: 'left' }}
         name={this.props.itemsStateName}
-        value={selectedValue}
+        value={this.props.selectedItem}
         onChange={this.handleOnChange}
         childContainer="div"
       >
         {radioListItems}
       </RadioGroup>
-    );
+    )
   }
 
   render() {
@@ -66,15 +62,16 @@ class GenericRadioFilters extends Component {
 
 GenericRadioFilters.propTypes = {
   title: React.PropTypes.string.isRequired,
-  items: React.PropTypes.objectOf(React.PropTypes.bool).isRequired,
+  items: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   toggleFilter: React.PropTypes.func.isRequired,
   actionType: React.PropTypes.string.isRequired,
-  itemsStateName: React.PropTypes.string.isRequired
+  itemsStateName: React.PropTypes.string.isRequired,
+  selectedItem: React.PropTypes.string.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    items: state.filters[ownProps.itemsStateName]
+    selectedItem: state.filters[ownProps.itemsStateName]
   };
 }
 

@@ -9,6 +9,7 @@ function PeriodFilter() {
       title="Period"
       actionType={TOGGLE_PERIOD_FILTER}
       itemsStateName="periods"
+      items={['past-7-days', 'past-30-days', 'past-90-days']}
     />
   );
 }

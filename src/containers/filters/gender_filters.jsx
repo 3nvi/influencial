@@ -8,6 +8,7 @@ function GenderFilters() {
       title="Genders"
       actionType={TOGGLE_GENDER_FILTER}
       itemsStateName="genders"
+      items={['both', 'male', 'female']}
     />
   );
 }

@@ -1,8 +1,17 @@
-import { TOGGLE_PERIOD_FILTER } from '../../actions/types';
-import GenericSingleValueMultipleReducer from './templates/generic_single_value_multiple_reducer';
+import {
+  TOGGLE_PERIOD_FILTER,
+  CLEAR_FILTERS
+} from '../../actions/types';
 
-export default GenericSingleValueMultipleReducer({
-  'past-7-days': false,
-  'past-30-days': false,
-  'past-90-days': true
-}, TOGGLE_PERIOD_FILTER);
+export const initialPeriodState = 'past-30-days';
+
+export default (state = initialPeriodState, action) => {
+  switch (action.type) {
+    case TOGGLE_PERIOD_FILTER:
+      return action.payload;
+    case CLEAR_FILTERS:
+      return initialPeriodState;
+    default:
+      return state;
+  }
+};

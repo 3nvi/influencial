@@ -1,8 +1,17 @@
-import { TOGGLE_GENDER_FILTER } from '../../actions/types';
-import GenericSingleValueMultipleReducer from './templates/generic_single_value_multiple_reducer';
+import {
+  TOGGLE_GENDER_FILTER,
+  CLEAR_FILTERS
+} from '../../actions/types';
 
-export default GenericSingleValueMultipleReducer({
-  both: true,
-  male: false,
-  female: false
-}, TOGGLE_GENDER_FILTER);
+export const initialGenderState = 'both';
+
+export default (state = initialGenderState, action) => {
+  switch (action.type) {
+    case TOGGLE_GENDER_FILTER:
+      return action.payload;
+    case CLEAR_FILTERS:
+      return initialGenderState;
+    default:
+      return state;
+  }
+};

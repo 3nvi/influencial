@@ -1,8 +1,17 @@
-import { TOGGLE_SERVICE_FILTER } from '../../actions/types';
-import GenericSingleValueMultipleReducer from './templates/generic_single_value_multiple_reducer';
+import {
+  TOGGLE_SERVICE_FILTER,
+  CLEAR_FILTERS
+} from '../../actions/types';
 
-export default GenericSingleValueMultipleReducer({
-  all: true,
-  twitter: false,
-  instagram: false
-}, TOGGLE_SERVICE_FILTER);
+export const initialServiceState = 'twitter';
+
+export default (state = initialServiceState, action) => {
+  switch (action.type) {
+    case TOGGLE_SERVICE_FILTER:
+      return action.payload;
+    case CLEAR_FILTERS:
+      return initialServiceState;
+    default:
+      return state;
+  }
+};

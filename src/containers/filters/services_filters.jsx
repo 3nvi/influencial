@@ -8,6 +8,7 @@ function ServiceFilters() {
       title="Social Media"
       actionType={TOGGLE_SERVICE_FILTER}
       itemsStateName="services"
+      items={['twitter', 'instagram']}
     />
   );
 }
