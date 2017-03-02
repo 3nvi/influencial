@@ -37,7 +37,7 @@ collapsibleFilterItem.propTypes = {
 };
 
 collapsibleFilterItem.defaultProps = {
-  initialCollapsedState: true
+  initialCollapsedState: false
 };
 
 export default collapsibleFilterItem;

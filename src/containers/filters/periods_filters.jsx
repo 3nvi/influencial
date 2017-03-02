@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { TOGGLE_PERIOD_FILTER } from '../../actions/types';
-import GenericSelectFilter from './templates/generic_select_filter_component';
+import GenericRadioFilters from './templates/generic_radio_filters_component';
 
 function PeriodFilter() {
   return (
-    <GenericSelectFilter
-      title="Calculate based on"
+    <GenericRadioFilters
+      title="Period"
       actionType={TOGGLE_PERIOD_FILTER}
       itemsStateName="periods"
     />
