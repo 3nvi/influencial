@@ -12,12 +12,12 @@ function FiltersList() {
   return (
     <div className="mdl-color-text--grey-600">
       <FilterBlock title="Advanced Settings" toggle>
-        <Cell col={12} className="center-block" style={{ marginBottom: 20 }}>
+        <div className="center-block" style={{ marginBottom: 20 }}>
           <AlgorithmFilter />
-        </Cell>
+        </div>
       </FilterBlock>
       <FilterBlock title="Filters">
-        <Cell col={12} className="center-block" style={{ marginBottom: 20 }}>
+        <div className="center-block" style={{ marginBottom: 20 }}>
           <CollapsibleFilterItem title="Period">
             <PeriodFilters />
           </CollapsibleFilterItem>
@@ -30,7 +30,7 @@ function FiltersList() {
           <CollapsibleFilterItem title="Social Media">
             <ServiceFilters />
           </CollapsibleFilterItem>
-        </Cell>
+        </div>
       </FilterBlock>
     </div>
   );

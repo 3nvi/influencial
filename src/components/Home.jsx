@@ -25,17 +25,15 @@ function Home() {
           <AdvancedFilters />
         </Cell>
         <Cell col={8}>
-          <Cell
-            col={12}
-            shadow={0}
-            className="center-block"
-            style={{ marginBottom: 30, padding: '5px 30px', background: 'white' }}
+          <div
+            className="center-block mdl-shadow--2dp"
+            style={{ marginBottom: 15, padding: '7.5px 30px', background: 'white' }}
           >
             <FreeSearchFilter />
-          </Cell>
-          {/*<Cell col={12} shadow={0} className="center-block" style={{ marginBottom: 20 }}>*/}
-            {/*<InfluencerList />*/}
-          {/*</Cell>*/}
+          </div>
+          <div className="center-block" style={{ marginBottom: 20 }}>
+            <InfluencerList />
+          </div>
         </Cell>
       </Grid>
     </Layout>

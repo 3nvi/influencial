@@ -1,0 +1,22 @@
+.influecer-list {
+  list-style: none;
+  padding: 0;
+
+  .influncer-list__item {
+    width: 100%;
+    display: block;
+    height: 200px;
+    margin-bottom: 15px;
+    background: white;
+
+    & > img {
+      display: inline-block;
+      width: 200px;
+      height: 200px;
+    }
+
+    & > div {
+      display: inline-block;
+    }
+  }
+}

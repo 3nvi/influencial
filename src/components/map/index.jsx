@@ -123,7 +123,7 @@ class Map extends Component {
       <Cell
         col={12}
         className="mdl-shadow--2dp"
-        style={{ padding: '15px', background: 'white' }}
+        style={{ padding: '15px', background: 'white', margin: 0, width: '100%' }}
       >
         <div id="influencer-map" style={{ width: '100%', height: '400px' }} />
       </Cell>

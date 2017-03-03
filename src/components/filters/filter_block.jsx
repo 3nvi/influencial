@@ -30,18 +30,16 @@ class FilterBlock extends Component {
 
   render() {
     return (
-      <Cell
-        shadow={0}
-        col={12}
-        className="mdl-typography--text-center mdl-color--white clearfix"
-        style={{ marginBottom: '30px' }}
+      <div
+        className="mdl-typography--text-center mdl-color--white mdl-shadow--2dp clearfix"
+        style={{ marginBottom: '15px' }}
       >
         <h4 style={{ margin: '24px auto' }}>
           {this.props.title}
           {this.renderToggle()}
         </h4>
         {(!this.state.collapsed) ? this.props.children : false}
-      </Cell>
+      </div>
     );
   }
 }
