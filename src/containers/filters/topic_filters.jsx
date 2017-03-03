@@ -1,5 +1,5 @@
 import React from 'react';
-import GenericCheckboxFilters from './templates/generic_checkbox_filters_component';
+import GenericCheckboxFilters from './templates/generic_multi_value_filter_component';
 import { TOGGLE_TOPIC_FILTER } from '../../actions/types';
 
 function TopicFilters() {

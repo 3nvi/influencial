@@ -1,10 +1,10 @@
 import React from 'react';
-import GenericRadioFilters from './templates/generic_radio_filters_component';
+import RadioFilterComponent from './templates/radio_filter_component';
 import { TOGGLE_GENDER_FILTER } from '../../actions/types';
 
 function GenderFilters() {
   return (
-    <GenericRadioFilters
+    <RadioFilterComponent
       title="Genders"
       actionType={TOGGLE_GENDER_FILTER}
       itemsStateName="genders"

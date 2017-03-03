@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import { toggleFilter } from '../../../actions/index';
 import CheckboxFilter from '../../../components/filters/items/checkbox_filter_item';
-import CollapsibleFilterItem from '../../../components/filters/common';
+import CollapsibleFilterItem from '../../../components/filters/collapsible_container';
 
 
 class GenericCheckboxFilters extends Component {
@@ -34,16 +34,11 @@ class GenericCheckboxFilters extends Component {
   }
 
   render() {
-    return (
-      <CollapsibleFilterItem title={this.props.title}>
-        {this.renderCheckboxList(this.props.items)}
-      </CollapsibleFilterItem>
-    );
+    return <div>{this.renderCheckboxList(this.props.items)}</div>;
   }
 }
 
 GenericCheckboxFilters.propTypes = {
-  title: React.PropTypes.string.isRequired,
   items: React.PropTypes.objectOf(React.PropTypes.bool).isRequired,
   toggleFilter: React.PropTypes.func.isRequired,
   actionType: React.PropTypes.string.isRequired,

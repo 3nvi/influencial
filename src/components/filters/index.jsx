@@ -5,6 +5,7 @@ import GenderFilters from '../../containers/filters/gender_filters';
 import PeriodFilters from '../../containers/filters/periods_filters';
 import ServiceFilters from '../../containers/filters/services_filters';
 import AlgorithmFilter from '../../containers/filters/algorithm_filters';
+import CollapsibleFilterItem from './collapsible_container';
 import FilterBlock from './filter_block';
 
 function FiltersList() {
@@ -17,10 +18,18 @@ function FiltersList() {
       </FilterBlock>
       <FilterBlock title="Filters">
         <Cell col={12} className="center-block" style={{ marginBottom: 20 }}>
-          <PeriodFilters />
-          <TopicFilters />
-          <GenderFilters />
-          <ServiceFilters />
+          <CollapsibleFilterItem title="Period">
+            <PeriodFilters />
+          </CollapsibleFilterItem>
+          <CollapsibleFilterItem title="Topics">
+            <TopicFilters />
+          </CollapsibleFilterItem>
+          <CollapsibleFilterItem title="Gender">
+            <GenderFilters />
+          </CollapsibleFilterItem>
+          <CollapsibleFilterItem title="Social Media">
+            <ServiceFilters />
+          </CollapsibleFilterItem>
         </Cell>
       </FilterBlock>
     </div>

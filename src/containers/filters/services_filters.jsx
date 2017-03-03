@@ -1,10 +1,10 @@
 import React from 'react';
-import GenericRadioFilters from './templates/generic_radio_filters_component';
+import RadioFilterComponent from './templates/radio_filter_component';
 import { TOGGLE_SERVICE_FILTER } from '../../actions/types';
 
 function ServiceFilters() {
   return (
-    <GenericRadioFilters
+    <RadioFilterComponent
       title="Social Media"
       actionType={TOGGLE_SERVICE_FILTER}
       itemsStateName="services"

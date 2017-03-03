@@ -24,7 +24,7 @@ class collapsibleFilterItem extends Component {
           {this.props.title}
         </button>
         <div className="collapsible-filter__item">
-          {(!isCollapsed) ? this.props.children : ''}
+          {(!isCollapsed) ? this.props.children : null}
         </div>
       </div>
     );
@@ -34,6 +34,7 @@ class collapsibleFilterItem extends Component {
 collapsibleFilterItem.propTypes = {
   initialCollapsedState: React.PropTypes.bool,
   title: React.PropTypes.string.isRequired,
+  children: React.PropTypes.element.isRequired
 };
 
 collapsibleFilterItem.defaultProps = {
