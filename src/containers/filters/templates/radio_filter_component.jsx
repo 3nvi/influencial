@@ -1,33 +1,42 @@
-
-
 import React from 'react';
 import { RadioGroup, Radio } from 'react-mdl';
-import GenericSingleValueFiltersHoc from './generic_single_value_filter_component';
+import GenericSingleValueFiltersHoc from './generic_filter_hoc';
 
-function renderRadioComponent(props) {
-  /* eslint-disable no-unused-vars, react/prop-types */
-  const { items, actionType, itemsStateName, selectedItem, toggleFilter, ...rest } = props;
-  /* eslint-enable no-unused-vars, react/prop-types */
+// we wrap with the outer function only because we want to pass "getPayload". We could have passed
+// it also at instantisation but then the code would become less DRY since we would redeclare the
+// same "getPayload" function for all same-type filters (i.e. radio, select etc.)
+function RadioFilterComponent(props) {
 
-  if (!items) {
-    return false;
+  function renderRadioComponent(inheritedProps) {
+    /* eslint-disable no-unused-vars, react/prop-types */
+    const {
+      items, actionType, itemsStateName, selectedItem, toggleFilter, getPayload, ...rest
+    } = inheritedProps;
+    /* eslint-enable no-unused-vars, react/prop-types */
+
+    if (!items.length) {
+      return false;
+    }
+
+    return (
+      <RadioGroup
+        style={{ textAlign: 'left' }}
+        name={itemsStateName}
+        childContainer="div"
+        {...rest}
+      >
+        {items.map(item => <Radio value={item} key={item} ripple>{item.split('-').join(' ')}</Radio>)}
+      </RadioGroup>
+    );
   }
 
-  return (
-    <RadioGroup
-      style={{ textAlign: 'left' }}
-      name={props.itemsStateName}
-      childContainer="div"
-      {...rest}
-    >
-      {items.map(item => <Radio value={item} key={item} ripple>{item.split('-').join(' ')}</Radio>)}
-    </RadioGroup>
-  );
+  renderRadioComponent.propTypes = {
+    itemsStateName: React.PropTypes.string.isRequired,
+    items: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  };
+
+  const EnhancedComponent = GenericSingleValueFiltersHoc(renderRadioComponent);
+  return <EnhancedComponent {...props} getPayload={event => event.target.value} />;
 }
 
-renderRadioComponent.propTypes = {
-  itemsStateName: React.PropTypes.string.isRequired,
-  items: React.PropTypes.arrayOf(React.PropTypes.string).isRequired
-};
-
-export default GenericSingleValueFiltersHoc(renderRadioComponent);
+export default RadioFilterComponent;

@@ -1,14 +1,16 @@
 import React from 'react';
-import GenericCheckboxFilters from './templates/generic_multi_value_filter_component';
+import CheckboxFilter from './templates/checkbox_filter_component';
 import { TOGGLE_TOPIC_FILTER } from '../../actions/types';
+import { Button } from 'react-mdl';
 
 function TopicFilters() {
   return (
-    <GenericCheckboxFilters
-      title="Topics"
-      actionType={TOGGLE_TOPIC_FILTER}
-      itemsStateName="topics"
-    />
+    <div>
+      <CheckboxFilter actionType={TOGGLE_TOPIC_FILTER} itemsStateName="topics" />
+      <Button className="transparent" ripple style={{ float: 'left', marginLeft: '-15px' }}>
+        + add new
+      </Button>
+    </div>
   );
 }
 
