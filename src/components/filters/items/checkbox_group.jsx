@@ -8,7 +8,7 @@ function CheckboxGroup(props) {
       <CheckboxItem
         key={item}
         name={item}
-        checked={props.items[item]}
+        checked={props.items[item].checked}
         handleCheckboxChange={props.onChange}
       />
     );
@@ -19,7 +19,7 @@ function CheckboxGroup(props) {
 
 CheckboxGroup.propTypes = {
   onChange: React.PropTypes.func.isRequired,
-  items: React.PropTypes.objectOf(React.PropTypes.bool).isRequired
+  items: React.PropTypes.objectOf(React.PropTypes.object).isRequired
 };
 
 export default CheckboxGroup;

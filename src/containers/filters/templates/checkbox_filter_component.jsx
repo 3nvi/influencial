@@ -21,14 +21,14 @@ function CheckboxFilterComponent(props) {
   }
 
   renderCheckboxComponent.propTypes = {
-    selectedItem: React.PropTypes.objectOf(React.PropTypes.bool).isRequired,
+    selectedItem: React.PropTypes.objectOf(React.PropTypes.object).isRequired,
   };
 
   const EnhancedComponent = GenericSingleValueFiltersHoc(renderCheckboxComponent);
   const getPayload = (event) => {
     return {
       name: event.target.name,
-      value: event.target.checked
+      checked: event.target.checked
     };
   };
 

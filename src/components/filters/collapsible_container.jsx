@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class collapsibleFilterItem extends Component {
+class CollapsibleContainer extends Component {
 
   constructor(props) {
     super(props);
@@ -31,15 +31,15 @@ class collapsibleFilterItem extends Component {
   }
 }
 
-collapsibleFilterItem.propTypes = {
+CollapsibleContainer.propTypes = {
   initialCollapsedState: React.PropTypes.bool,
   title: React.PropTypes.string.isRequired,
   children: React.PropTypes.element.isRequired
 };
 
-collapsibleFilterItem.defaultProps = {
+CollapsibleContainer.defaultProps = {
   initialCollapsedState: false
 };
 
-export default collapsibleFilterItem;
+export default CollapsibleContainer;
 
