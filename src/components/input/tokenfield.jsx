@@ -10,81 +10,60 @@ class Tokenfield extends Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleTokenAddition = this.handleTokenAddition.bind(this);
     this.handleTokenRemoval = this.handleTokenRemoval.bind(this);
-    this.state = {
-      value: '',
-      tokens: (this.props.value) ? this.props.value.split(',') : [],
-      hasError: false
-    };
   }
 
-  handleChange(event) {
-    this.setState({
-      value: event.target.value,
-      hasError: false
-    });
-  }
-
-  handleKeyPress(event) {
-    if (event.key === 'Enter') {
-      const formattedHashtag = event.target.value.split(' ').map(p => _.capitalize(p)).join('');
-      this.handleTokenAddition(formattedHashtag);
+  handleKeyPress(event, hasError) {
+    if (event.key === 'Enter' && hasError === false) {
+      this.handleTokenAddition();
     }
   }
 
-  handleTokenAddition(tokenValue) {
-    const newTokenList = this.state.tokens.slice();
-    const newTokenListLow = newTokenList.map(token => token.toLowerCase());
-
-    // only add it if it doesn't exist and it's not empty
-    if (tokenValue && newTokenListLow.indexOf(tokenValue.toLowerCase()) === -1) {
-      newTokenList.push(tokenValue);
-
-      // inform any subscribers
-      this.props.onChange(newTokenList.join());
-
-      // update internal state
-      this.setState({
-        value: '',
-        tokens: newTokenList,
-        hasError: false
-      });
-    } else {
-      this.setState({ hasError: true });
-    }
+  // don't forget to ACCOUNT for previous tokens on each change
+  handleChange(event, tokens) {
+    this.props.onChange(`${tokens.join(',')},${event.target.value}`);
   }
 
+  // add a comma on enter
+  handleTokenAddition() {
+    this.props.onChange(`${this.props.value},`);
+  }
+
+  // simply replace the "token," with ""
   handleTokenRemoval(tokenValue) {
-    const newTokenList = _.pull(this.state.tokens, tokenValue);
-
-    // inform any subscribers
-    this.props.onChange(newTokenList.join());
-
-    // update internal state
-    this.setState({
-      value: '',
-      tokens: _.pull(this.state.tokens, tokenValue)
-    });
+    this.props.onChange(this.props.value.replace(`${tokenValue},`, ''));
   }
 
   renderTokenList(tokenList) {
-    return tokenList.map(token => (
-      <Chip key={token.toLowerCase()} onClose={() => this.handleTokenRemoval(token)}>{token}</Chip>
-    ));
+    return tokenList.map((token) => {
+      if (token) {
+        return (
+          <Chip key={token.toLowerCase()} onClose={() => this.handleTokenRemoval(token)}>
+            {token}
+          </Chip>
+        );
+      }
+      return false;
+    });
   }
 
   render() {
+    const parts = this.props.value.split(',');
+    const filledInValue = _.last(parts).replace(' ', '');
+    const tokens = (filledInValue) ? parts.splice(0, parts.length - 1) : _.pull(parts, '');
+    const hasError = tokens.map(i => i.toLowerCase()).indexOf(filledInValue.toLowerCase()) !== -1;
+
     return (
       <div className="mdl-tokenfield">
         <Textfield
           floatingLabel
-          value={this.state.value}
+          value={filledInValue}
           label={this.props.label}
-          onKeyPress={this.handleKeyPress}
-          onChange={this.handleChange}
-          error={(this.state.hasError) ? 'Cannot add duplicate tokens' : false}
+          onKeyPress={event => this.handleKeyPress(event, hasError)}
+          onChange={event => this.handleChange(event, tokens)}
+          error={(hasError) ? 'Cannot add duplicate tokens' : false}
         />
         <div className="center-block text-left">
-          {this.renderTokenList(this.state.tokens)}
+          {this.renderTokenList(tokens)}
         </div>
       </div>
     );
