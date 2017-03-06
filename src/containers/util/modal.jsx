@@ -30,7 +30,7 @@ class Modal extends Component {
             {this.props.children}
           </DialogContent>
           <DialogActions>
-            <Button>{this.props.confirmText}</Button>
+            <Button onClick={this.props.handleConfirm}>{this.props.confirmText}</Button>
             <Button onClick={this.handleCloseDialog}>Cancel</Button>
           </DialogActions>
         </Dialog>
@@ -41,14 +41,16 @@ class Modal extends Component {
 
 Modal.propTypes = {
   title: React.PropTypes.string,
-  children: React.PropTypes.element.isRequired,
   confirmText: React.PropTypes.string,
+  handleConfirm: React.PropTypes.func,
+  children: React.PropTypes.element.isRequired,
   invokerButton: React.PropTypes.element.isRequired
 };
 
 Modal.defaultProps = {
   title: '',
-  confirmText: 'Ok'
+  confirmText: 'Ok',
+  handleConfirm: () => true
 };
 
 export default Modal;

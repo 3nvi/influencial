@@ -12,7 +12,7 @@ class Tokenfield extends Component {
     this.handleTokenRemoval = this.handleTokenRemoval.bind(this);
     this.state = {
       value: '',
-      tokens: [],
+      tokens: (this.props.value) ? this.props.value.split(',') : [],
       hasError: false
     };
   }
@@ -26,7 +26,8 @@ class Tokenfield extends Component {
 
   handleKeyPress(event) {
     if (event.key === 'Enter') {
-      this.handleTokenAddition(event.target.value);
+      const formattedHashtag = event.target.value.split(' ').map(p => _.capitalize(p)).join('');
+      this.handleTokenAddition(formattedHashtag);
     }
   }
 
@@ -37,6 +38,11 @@ class Tokenfield extends Component {
     // only add it if it doesn't exist and it's not empty
     if (tokenValue && newTokenListLow.indexOf(tokenValue.toLowerCase()) === -1) {
       newTokenList.push(tokenValue);
+
+      // inform any subscribers
+      this.props.onChange(newTokenList.join());
+
+      // update internal state
       this.setState({
         value: '',
         tokens: newTokenList,
@@ -48,8 +54,14 @@ class Tokenfield extends Component {
   }
 
   handleTokenRemoval(tokenValue) {
+    const newTokenList = _.pull(this.state.tokens, tokenValue);
+
+    // inform any subscribers
+    this.props.onChange(newTokenList.join());
+
+    // update internal state
     this.setState({
-      value: null,
+      value: '',
       tokens: _.pull(this.state.tokens, tokenValue)
     });
   }
@@ -80,11 +92,15 @@ class Tokenfield extends Component {
 }
 
 Tokenfield.propTypes = {
-  label: React.PropTypes.string
+  label: React.PropTypes.string,
+  value: React.PropTypes.string,
+  onChange: React.PropTypes.func
 };
 
 Tokenfield.defaultProps = {
-  label: 'Enter some values...'
+  label: 'Enter some values...',
+  value: '',
+  onChange: () => true
 };
 
 export default Tokenfield;
