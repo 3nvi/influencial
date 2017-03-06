@@ -11,12 +11,3 @@
   -o-transition: all #{$s}s ease-in-out;
   transition: all #{$s}s ease-in-out;
 }
-
-.center-block {
-  @include center-block;
-}
-
-.center-items {
-  align-items: center;
-  justify-content: center;
-}

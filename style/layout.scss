@@ -5,11 +5,11 @@ html > body {
     font-size: 16px;
   }
 
-  &, button, div, span, * {
-    font-family: 'Roboto','Helvetica','Arial',sans-serif;
+  &, button, div, span, input, p {
+    font-family: 'Roboto','Helvetica','Arial',sans-serif !important;
   }
 
-  input, textarea, select {
+  textarea, select {
     font-family: 'Helvetica','Arial',sans-serif;
   }
 
@@ -46,4 +46,25 @@ html > body {
   content: "";
   display: table;
   clear: both;
+}
+
+.center-block {
+  @include center-block;
+}
+
+.center-items {
+  align-items: center;
+  justify-content: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
 }
