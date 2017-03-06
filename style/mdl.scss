@@ -1,0 +1,49 @@
+
+/* Select */
+
+.mdl-selectfield {
+  width: 100%;
+  max-width: 300px;
+  font-size: 16px;
+}
+
+.mdl-option.mdl-option--selected {
+  color: black;
+  font-weight: bold;
+}
+
+/* tokenfield */
+.mdl-tokenfield {
+  & > * {
+    width: 300px
+  }
+
+  .mdl-chip {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+/* Dialog */
+
+dialog.mdl-dialog {
+  min-width: 400px;
+
+  &, h4, button, input {
+    color: $text-darkgrey;
+  }
+
+  .mdl-textfield__input {
+    font-size: 18px;
+  }
+
+  .mdl-dialog__title {
+    padding: 24px 24px 0 48px;
+    font-size: 25px;
+  }
+
+/* Because rendering MDL when something is hidden (0 width) causes offset errors */
+  .mdl-textfield__label::after {
+    bottom: 5px;
+  }
+}
