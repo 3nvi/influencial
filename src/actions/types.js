@@ -1,5 +1,6 @@
 /* Define the action types e.g.  ACTION_ADD = 'ACTION_ADD' */
 
+/* Advanced filters */
 export const TOGGLE_GENDER_FILTER = 'TOGGLE_GENDER_FILTER';
 export const TOGGLE_TOPIC_FILTER = 'TOGGLE_TOPIC_FILTER';
 export const TOGGLE_SERVICE_FILTER = 'TOGGLE_SERVICE_FILTER';
@@ -7,8 +8,9 @@ export const TOGGLE_FREE_TEXT_FILTER = 'TOGGLE_FREE_TEXT_FILTER';
 export const TOGGLE_PERIOD_FILTER = 'TOGGLE_PERIOD_FILTER';
 export const TOGGLE_ALGORITHM_FILTER = 'TOGGLE_ALGORITHM_FILTER';
 
+/* Location filters */
 export const ADD_LOCATION_FILTER = 'ADD_LOCATION_FILTER';
 export const REMOVE_LOCATION_FILTER = 'REMOVE_LOCATION_FILTER';
 
+/* Clear ALL filters */
 export const CLEAR_FILTERS = 'CLEAR_FILTERS';
-
