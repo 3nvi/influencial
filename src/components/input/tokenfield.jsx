@@ -20,7 +20,11 @@ class Tokenfield extends Component {
 
   // don't forget to ACCOUNT for previous tokens on each change
   handleChange(event, tokens) {
-    this.props.onChange(`${tokens.join(',')},${event.target.value}`);
+    let value = event.target.value;
+    if (value.length && value[0] !== '#') {
+      value = `#${value}`;
+    }
+    this.props.onChange(`${tokens.join(',')},${value}`);
   }
 
   // add a comma on enter

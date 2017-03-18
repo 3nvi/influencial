@@ -1,6 +1,5 @@
 import React from 'react';
 import CheckboxGroup from '../../../components/input/checkbox_group';
-import CheckboxItem from '../../../components/input/checkbox_item';
 import GenericSingleValueFiltersHoc from './generic_filter_hoc';
 
 // we wrap with the outer function only because we want to pass "getPayload". We could have passed

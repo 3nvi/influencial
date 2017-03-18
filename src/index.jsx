@@ -11,9 +11,10 @@ import Routes from './router';
 
 import '../style/index.scss';
 
+export const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
 function App() {
-  const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
-window.store = store;
+  window.store = store;
   return (
     <Provider store={store}>
       <Routes />

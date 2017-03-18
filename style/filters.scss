@@ -75,3 +75,27 @@ button.transparent:hover {
   text-decoration: underline;
 }
 
+.mdl-checkbox--with-options {
+  position: relative;
+
+  &:hover .checkbox-options {
+    display: block;
+  }
+
+  .checkbox-options {
+    z-index: 1;
+    display: none;
+    position: absolute;
+    right: -45px;
+    top: -5px;
+
+    & > button {
+      margin-left: 10px;
+    }
+
+    i.material-icons {
+      font-size: 20px;
+    }
+  }
+}
+

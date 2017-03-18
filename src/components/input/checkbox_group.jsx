@@ -2,7 +2,6 @@ import React from 'react';
 import CheckboxItem from './checkbox_item';
 
 function CheckboxGroup(props) {
-
   const checkboxes = Object.keys(props.items).map((item) => {
     return (
       <CheckboxItem
@@ -10,6 +9,7 @@ function CheckboxGroup(props) {
         name={item}
         checked={props.items[item].checked}
         handleCheckboxChange={props.onChange}
+        {...props}
       />
     );
   });

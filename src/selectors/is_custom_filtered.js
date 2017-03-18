@@ -16,7 +16,7 @@ const evalFiltered = (topics, genders, services, periods, locations, q) => !(
     && (services === initialServiceState)
     && (periods === initialPeriodState)
     && !locations.length
-    && _.map(Object.values(topics), 'checked').reduce((a, b) => a && b)
+    && (_.isEmpty(topics) || _.map(Object.values(topics), 'checked').reduce((a, b) => a && b))
   );
 
 export default createSelector(
