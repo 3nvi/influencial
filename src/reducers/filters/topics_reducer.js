@@ -6,19 +6,6 @@ import {
 } from '../../actions/types';
 
 
-function resetCheckedState(state) {
-  const resetedState = {};
-  _.forOwn(state, (value, key) => {
-    resetedState[key] = {
-      checked: true,
-      url: value.url,
-      title: key,
-      hashtags: value.hashtags
-    };
-  });
-  return resetedState;
-}
-
 export default (state = {}, action) => {
   switch (action.type) {
     case INIT_TOPIC_FILTER:
@@ -26,15 +13,12 @@ export default (state = {}, action) => {
     case TOGGLE_TOPIC_FILTER:
       return {
         ...state,
-        [action.payload.name]: {
-          checked: action.payload.checked,
-          url: state[action.payload.name].url,
-          title: action.payload.name,
-          hashtags: state[action.payload.name].hashtags
-        }
+        [action.payload.name]: _.extend(
+          state[action.payload.name], { checked: action.payload.checked }
+        )
       };
     case CLEAR_FILTERS:
-      return resetCheckedState(state);
+      return _.mapValues(state, topic => _.extend(topic, { checked: true }));
     default:
       return state;
   }
