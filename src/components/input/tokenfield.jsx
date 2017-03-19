@@ -12,8 +12,8 @@ class Tokenfield extends Component {
     this.handleTokenRemoval = this.handleTokenRemoval.bind(this);
   }
 
-  handleKeyPress(event, hasError) {
-    if (event.key === 'Enter' && hasError === false) {
+  handleKeyPress(event) {
+    if (event.key === 'Enter' && !this.props.error) {
       this.handleTokenAddition();
     }
   }
@@ -24,7 +24,10 @@ class Tokenfield extends Component {
     if (value.length && value[0] !== '#') {
       value = `#${value}`;
     }
-    this.props.onChange(`${tokens.join(',')},${value}`);
+
+    let previousTokenString = tokens.join(',');
+    previousTokenString += (previousTokenString.length) ? ',' : '';
+    this.props.onChange(`${previousTokenString}${value}`);
   }
 
   // add a comma on enter
@@ -53,8 +56,7 @@ class Tokenfield extends Component {
   render() {
     const parts = this.props.value.split(',');
     const filledInValue = _.last(parts).replace(' ', '');
-    const tokens = (filledInValue) ? parts.splice(0, parts.length - 1) : _.pull(parts, '');
-    const hasError = tokens.map(i => i.toLowerCase()).indexOf(filledInValue.toLowerCase()) !== -1;
+    const tokens = (filledInValue) ? _.initial(parts) : _.pull(parts, '');
 
     return (
       <div className="mdl-tokenfield">
@@ -62,9 +64,9 @@ class Tokenfield extends Component {
           floatingLabel
           value={filledInValue}
           label={this.props.label}
-          onKeyPress={event => this.handleKeyPress(event, hasError)}
+          onKeyPress={event => this.handleKeyPress(event)}
           onChange={event => this.handleChange(event, tokens)}
-          error={(hasError) ? 'Cannot add duplicate tokens' : false}
+          error={this.props.error || false}
         />
         <div className="center-block text-left">
           {this.renderTokenList(tokens)}
@@ -77,12 +79,14 @@ class Tokenfield extends Component {
 Tokenfield.propTypes = {
   label: React.PropTypes.string,
   value: React.PropTypes.string,
+  error: React.PropTypes.string,
   onChange: React.PropTypes.func
 };
 
 Tokenfield.defaultProps = {
   label: 'Enter some values...',
   value: '',
+  error: false,
   onChange: () => true
 };
 

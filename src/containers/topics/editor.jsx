@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
-import { closeTopicModal } from '../../actions/index';
+import _ from 'lodash';
+import { closeTopicModal, createTopic, updateTopic, deleteTopic } from '../../actions/index';
 import ModalForm from './modal-form';
 import { topicTextField, topicHashtagsField } from './util';
 
-function TopicCreate(props) {
-  const { operation } = props;
-  const title = (() => {
-    switch (operation) {
+class TopicCreateOrUpdate extends Component {
+  constructor(props) {
+    super(props);
+
+    this.getTitle = this.getTitle.bind(this);
+    this.handleConfirm = this.handleConfirm.bind(this);
+    this.renderModalContent = this.renderModalContent.bind(this);
+  }
+
+  getTitle() {
+    switch (this.props.operation) {
       case 'create':
         return 'Add a new topic';
       case 'update':
@@ -17,49 +25,109 @@ function TopicCreate(props) {
       default:
         return 'Delete topic';
     }
-  })();
-  const confirmText = title.split(' ')[0];
-  const displayLabel = operation === 'create';
+  }
 
-  return (
-    <ModalForm
-      {...props}
-      isOpened={operation !== null}
-      title={title}
-      confirmText={confirmText}
-    >
+  handleConfirm(values) {
+    const title = values.title;
+    const { selectedTopic, operation } = this.props;
+    const hashtags = _.initial(values.hashtags.split(','));
+
+    if (operation === 'create') {
+      this.props.createTopic({ title, hashtags });
+    } else if (operation === 'update') {
+      this.props.updateTopic({ title, hashtags, selectedTopic });
+    } else {
+      this.props.deleteTopic(selectedTopic);
+    }
+  }
+
+  renderModalContent() {
+    if (this.props.operation !== 'delete') {
+      return (
+        <div>
+          <Field
+            name="title"
+            label={this.props.operation === 'create' ? 'Enter a name for this topic...' : ''}
+            component={topicTextField}
+          />
+          <Field
+            name="hashtags"
+            label="Fill in #hashtags by pressing Enter"
+            component={topicHashtagsField}
+          />
+        </div>
+      );
+    }
+    return (
       <div>
-        <Field
-          name="title"
-          label={displayLabel ? 'Enter a name for this topic...' : ''}
-          component={topicTextField}
-        />
-        <Field
-          name="hashtags"
-          label="Fill in #hashtags by pressing Enter"
-          component={topicHashtagsField}
-        />
+        Are you sure you want to delete:
+        <br />
+        <b style={{ textDecoration: 'underline' }}>{this.props.selectedTopic.title}</b>?
       </div>
-    </ModalForm>
-  );
+    );
+  }
+
+  render() {
+    const title = this.getTitle();
+    const confirmText = title.split(' ')[0];
+
+    return (
+      <ModalForm
+        {...this.props}
+        isOpened={this.props.operation !== null}
+        title={title}
+        confirmText={confirmText}
+        handleConfirm={this.handleConfirm}
+      >
+        {this.renderModalContent()}
+      </ModalForm>
+    );
+  }
 }
 
-TopicCreate.propTypes = {
-  operation: React.PropTypes.string
+TopicCreateOrUpdate.propTypes = {
+  operation: React.PropTypes.string,
+  selectedTopic: React.PropTypes.objectOf(React.PropTypes.any),
+  createTopic: React.PropTypes.func.isRequired,
+  updateTopic: React.PropTypes.func.isRequired,
+  deleteTopic: React.PropTypes.func.isRequired
 };
 
-TopicCreate.defaultProps = {
-  operation: null
+TopicCreateOrUpdate.defaultProps = {
+  operation: null,
+  selectedTopic: null
 };
+
+function validate(values, props) {
+  const { title, hashtags } = values;
+  const errors = {};
+
+  if (title && props.topicTitles.indexOf(title.toLowerCase()) > -1) {
+    if (!props.initialValues || title !== props.initialValues.title) {
+      errors.title = 'This topic name already exists';
+    }
+  }
+  if (hashtags) {
+    const currentToken = _.last(hashtags.split(',')).toLowerCase();
+    const addedTokens = _.initial(_.map(hashtags.split(','), token => token.toLowerCase()));
+    if (addedTokens.indexOf(currentToken) > -1) {
+      errors.hashtags = 'Cannot add duplicate hashtags';
+    }
+  }
+  return errors;
+}
 
 function mapStateToProps(state) {
-  const props = { operation: state.modals.selectedOperation };
+  const props = {
+    operation: state.modals.selectedOperation,
+    topicTitles: _.map(_.keys(state.filters.topics), title => title.toLowerCase())
+  };
 
-  if (props.operation === 'update') {
-    const selectedTopic = state.filters.topics[state.modals.selectedTopicKey];
+  if (props.operation && props.operation !== 'create') {
+    props.selectedTopic = state.filters.topics[state.modals.selectedTopicKey];
     props.initialValues = {
-      title: selectedTopic.title,
-      hashtags: selectedTopic.hashtags.map(hashtag => `${hashtag},`).join('')
+      title: props.selectedTopic.title,
+      hashtags: props.selectedTopic.hashtags.map(hashtag => `${hashtag},`).join('')
     };
   }
 
@@ -67,10 +135,16 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ handleCancel: closeTopicModal }, dispatch);
+  return bindActionCreators({
+    handleCancel: closeTopicModal,
+    createTopic,
+    updateTopic,
+    deleteTopic,
+  }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
-  form: 'topic'
-})(TopicCreate));
+  form: 'topic',
+  validate
+})(TopicCreateOrUpdate));
 

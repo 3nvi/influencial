@@ -1,6 +1,6 @@
 import React from 'react';
 import { Checkbox, IconButton } from 'react-mdl';
-import { openTopicUpdate } from '../../actions/index';
+import { openTopicUpdate, openTopicDelete } from '../../actions/index';
 
 function CheckboxItem(props) {
   const checkbox = (
@@ -22,7 +22,7 @@ function CheckboxItem(props) {
       {checkbox}
       <span className="checkbox-options">
         <IconButton name="create" ripple onClick={() => props.handleUpdate(props.name)} />
-        <IconButton name="delete" ripple />
+        <IconButton name="delete" ripple onClick={() => props.handleDelete(props.name)} />
       </span>
     </div>
   );
@@ -33,6 +33,7 @@ CheckboxItem.propTypes = {
   checked: React.PropTypes.bool.isRequired,
   handleCheckboxChange: React.PropTypes.func.isRequired,
   handleUpdate: React.PropTypes.func.isRequired,
+  handleDelete: React.PropTypes.func.isRequired,
   editable: React.PropTypes.bool,
   deletable: React.PropTypes.bool
 };

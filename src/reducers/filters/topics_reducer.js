@@ -1,6 +1,9 @@
 import _ from 'lodash';
 import {
-  INIT_TOPIC_FILTER,
+  CREATE_TOPIC,
+  UPDATE_TOPIC,
+  DELETE_TOPIC,
+  FETCH_TOPIC_LIST,
   TOGGLE_TOPIC_FILTER,
   CLEAR_FILTERS
 } from '../../actions/types';
@@ -8,8 +11,17 @@ import {
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case INIT_TOPIC_FILTER:
+    case FETCH_TOPIC_LIST:
       return _.mapKeys(_.map(action.payload, o => _.extend({ checked: true }, o)), 'title');
+    case CREATE_TOPIC:
+      return { ...state, [action.payload.title]: _.extend({ checked: true }, action.payload) };
+    case UPDATE_TOPIC:
+      return _.extend(
+        _.omit(state, [action.meta.prevTitle]),
+        { [action.payload.title]: action.payload }
+      );
+    case DELETE_TOPIC:
+      return _.omit(state, [action.payload.title]);
     case TOGGLE_TOPIC_FILTER:
       return {
         ...state,

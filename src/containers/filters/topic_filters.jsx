@@ -8,12 +8,13 @@ import TopicModal from '../topics/editor';
 import {
   openTopicCreate,
   openTopicUpdate,
-  initTopicFilters
+  openTopicDelete,
+  fetchTopics
 } from '../../actions/index';
 
 class TopicFilters extends Component {
   componentWillMount() {
-    this.props.initTopicFilters();
+    this.props.fetchTopics();
   }
 
   render() {
@@ -25,11 +26,12 @@ class TopicFilters extends Component {
           editable
           deletable
           handleUpdate={this.props.openTopicUpdate}
+          handleDelete={this.props.openTopicDelete}
         />
         <Button
           className="transparent"
           ripple
-          style={{ float: 'left', marginLeft: '-15px' }}
+          style={{ float: 'left', margin: '0 0 15px -15px' }}
           onClick={this.props.openTopicCreate}
         >
           + add new
@@ -43,14 +45,16 @@ class TopicFilters extends Component {
 TopicFilters.propTypes = {
   openTopicCreate: React.PropTypes.func.isRequired,
   openTopicUpdate: React.PropTypes.func.isRequired,
-  initTopicFilters: React.PropTypes.func.isRequired
+  openTopicDelete: React.PropTypes.func.isRequired,
+  fetchTopics: React.PropTypes.func.isRequired
 };
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     openTopicCreate,
     openTopicUpdate,
-    initTopicFilters
+    openTopicDelete,
+    fetchTopics
   }, dispatch);
 }
 

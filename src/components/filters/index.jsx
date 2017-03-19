@@ -1,5 +1,4 @@
 import React from 'react';
-import { Cell } from 'react-mdl';
 import TopicFilters from '../../containers/filters/topic_filters';
 import GenderFilters from '../../containers/filters/gender_filters';
 import PeriodFilters from '../../containers/filters/periods_filters';

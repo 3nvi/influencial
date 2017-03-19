@@ -35,7 +35,6 @@
 
 .collapsible-filter__item {
   position: relative;
-  overflow-y: hidden;
   max-height: 500px;
   padding: 7.5% 15%;
 
@@ -97,5 +96,9 @@ button.transparent:hover {
       font-size: 20px;
     }
   }
+}
+
+.ps-container {
+  max-height: 400px;
 }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 class CollapsibleContainer extends Component {
 
@@ -23,9 +24,11 @@ class CollapsibleContainer extends Component {
         <button className="collapsible-filter__control" onClick={this.handleClick}>
           {this.props.title}
         </button>
-        <div className="collapsible-filter__item">
-          {(!isCollapsed) ? this.props.children : null}
-        </div>
+        <PerfectScrollbar>
+          <div className="collapsible-filter__item">
+            {(!isCollapsed) ? this.props.children : null}
+          </div>
+        </PerfectScrollbar>
       </div>
     );
   }

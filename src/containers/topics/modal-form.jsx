@@ -25,13 +25,13 @@ class ModalForm extends Component {
     return (
       <div>
         <Dialog open={this.props.isOpened} onCancel={this.handleCloseDialog}>
-          <form onSubmit={handleSubmit}>
+          <form>
             <DialogTitle>{this.props.title}</DialogTitle>
             <DialogContent>
               {this.props.children}
             </DialogContent>
             <DialogActions>
-              <Button type="submit" onClick={this.props.handleConfirm}>
+              <Button type="button" onClick={handleSubmit(this.props.handleConfirm)}>
                 {this.props.confirmText}
               </Button>
               <Button type="button" onClick={this.handleCloseDialog}>
