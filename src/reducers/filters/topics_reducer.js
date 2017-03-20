@@ -18,7 +18,7 @@ export default (state = {}, action) => {
     case UPDATE_TOPIC:
       return _.extend(
         _.omit(state, [action.meta.prevTitle]),
-        { [action.payload.title]: action.payload }
+        { [action.payload.title]: _.extend({ checked: true }, action.payload) }
       );
     case DELETE_TOPIC:
       return _.omit(state, [action.payload.title]);

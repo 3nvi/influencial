@@ -2,7 +2,10 @@ import {
   OPEN_TOPIC_CREATE_MODAL,
   OPEN_TOPIC_UPDATE_MODAL,
   OPEN_TOPIC_DELETE_MODAL,
-  CLOSE_TOPIC_MODAL
+  CLOSE_TOPIC_MODAL,
+  CREATE_TOPIC,
+  UPDATE_TOPIC,
+  DELETE_TOPIC
 } from '../actions/types';
 
 const initialState = {
@@ -18,10 +21,12 @@ export default (state = initialState, action) => {
       return { ...state, selectedOperation: 'update', selectedTopicKey: action.payload };
     case OPEN_TOPIC_DELETE_MODAL:
       return { ...state, selectedOperation: 'delete', selectedTopicKey: action.payload };
+    case CREATE_TOPIC:
+    case UPDATE_TOPIC:
+    case DELETE_TOPIC:
     case CLOSE_TOPIC_MODAL:
       return { ...state, selectedOperation: null, selectedTopicKey: null };
     default:
       return state;
   }
-}
-
+};

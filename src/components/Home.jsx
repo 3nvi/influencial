@@ -7,6 +7,7 @@ import Map from './map/index';
 import AdvancedFilters from './filters/index';
 import InfluencerList from '../containers/influencers/list';
 import FreeSearchFilter from '../containers/filters/free_search_filter';
+import SnackbarNotification from '../containers/util/snackbar';
 
 function Home() {
   return (
@@ -36,6 +37,7 @@ function Home() {
           </div>
         </Cell>
       </Grid>
+      <SnackbarNotification />
     </Layout>
   );
 }

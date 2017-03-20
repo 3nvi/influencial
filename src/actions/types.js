@@ -27,5 +27,8 @@ export const CREATE_TOPIC = 'CREATE_TOPIC';
 export const UPDATE_TOPIC = 'UPDATE_TOPIC';
 export const DELETE_TOPIC = 'DELETE_TOPIC';
 
+/* notifications for the user */
+export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
+export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
 
 

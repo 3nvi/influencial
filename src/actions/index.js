@@ -28,16 +28,19 @@ export function closeTopicModal() {
   return { type: actions.CLOSE_TOPIC_MODAL };
 }
 
+export function addNotification(text) {
+  return { type: actions.ADD_NOTIFICATION, payload: text };
+}
+
+export function removeNotification() {
+  return { type: actions.REMOVE_NOTIFICATION };
+}
+
 export function fetchTopics() {
   return dispatch => (
     axios.get(`${SERVER_URL}topics/`)
       .then((response) => {
-        dispatch({
-          type: actions.FETCH_TOPIC_LIST,
-          payload: response.data.results
-        });
-
-        dispatch(closeTopicModal());
+        dispatch({ type: actions.FETCH_TOPIC_LIST, payload: response.data.results });
       })
       .catch((error) => {
         console.error(error);
@@ -53,10 +56,8 @@ export function createTopic(payload) {
       hashtags: payload.hashtags
     })
     .then((response) => {
-      dispatch({
-        type: actions.CREATE_TOPIC,
-        payload: JSON.parse(response)
-      });
+      dispatch({ type: actions.CREATE_TOPIC, payload: response.data });
+      dispatch(addNotification('Topic successfully created!'));
     })
     .catch(() => {
       alert('Sorry couldn\'t create your new topic');
@@ -74,13 +75,12 @@ export function updateTopic(payload) {
     .then((response) => {
       dispatch({
         type: actions.UPDATE_TOPIC,
-        payload: JSON.parse(response),
+        payload: response.data,
         meta: {
           prevTitle: payload.selectedTopic.title
         }
       });
-
-      dispatch(closeTopicModal());
+      dispatch(addNotification('Topic has been updated successfully!'));
     })
     .catch(() => {
       // in case of server error
@@ -94,12 +94,8 @@ export function deleteTopic(payload) {
     // sync with server
     axios.delete(payload.url)
       .then(() => {
-        dispatch({
-          type: actions.DELETE_TOPIC,
-          payload
-        });
-
-        dispatch(closeTopicModal());
+        dispatch({ type: actions.DELETE_TOPIC, payload });
+        dispatch(addNotification(`Topic ${payload.title} deleted`));
       })
       .catch(() => {
         // in case of server error
@@ -107,4 +103,3 @@ export function deleteTopic(payload) {
       });
   };
 }
-
