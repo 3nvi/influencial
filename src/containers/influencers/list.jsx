@@ -1,24 +1,65 @@
 import React from 'react';
-import { Icon } from 'react-mdl';
+import Influencer from './list_item';
 
 function InfluencerList() {
   return (
     <ol className="influecer-list">
-      <li className="influncer-list__item mdl-shadow--2dp">
-        <img src="http://lorempixel.com/200/200" alt="Random" />
-      </li>
-      <li className="influncer-list__item mdl-shadow--2dp">
-        <img src="http://lorempixel.com/200/200" alt="Random" />
-      </li>
-      <li className="influncer-list__item mdl-shadow--2dp">
-        <img src="http://lorempixel.com/200/200" alt="Random" />
-      </li>
-      <li className="influncer-list__item mdl-shadow--2dp">
-        <img src="http://lorempixel.com/200/200" alt="Random" />
-      </li>
-      <li className="influncer-list__item mdl-shadow--2dp">
-        <img src="http://lorempixel.com/200/200" alt="Random" />
-      </li>
+      <Influencer
+        gender="male"
+        image="http://lorempixel.com/170/170"
+        info="This is a beautiful description with bad grammar of cource fucking grammar Nazi"
+        location="Kurdistan"
+        name="Cara DeLevigne"
+        service="twitter"
+        serviceURL="https://twitter/mrjamesmay/"
+        website="https://apilama.com"
+        mediaCount={1200}
+        followerCount={1200}
+        username="mrJamesMay"
+        order={1}
+      />
+      <Influencer
+        gender="male"
+        image="http://lorempixel.com/170/170"
+        info="This is a beautiful description with bad grammar of cource fucking grammar Nazi"
+        location="Kurdistan"
+        name="Cara DeLevigne"
+        service="twitter"
+        serviceURL="https://twitter/mrjamesmay/"
+        website="https://apilama.com"
+        mediaCount={1200}
+        followerCount={1200}
+        username="mrJamesMay"
+        order={2}
+      />
+      <Influencer
+        gender="male"
+        image="http://lorempixel.com/170/170"
+        info="This is a beautiful description with bad grammar of cource fucking grammar Nazi"
+        location="Kurdistan"
+        name="Cara DeLevigne"
+        service="twitter"
+        serviceURL="https://twitter/mrjamesmay/"
+        website="https://apilama.com"
+        mediaCount={1200}
+        followerCount={1200}
+        username="mrJamesMay"
+        order={3}
+      />
+      <Influencer
+        gender="male"
+        image="http://lorempixel.com/170/170"
+        info="This is a beautiful description with bad grammar of cource fucking grammar Nazi"
+        location="Kurdistan"
+        name="Cara DeLevigne"
+        service="twitter"
+        serviceURL="https://twitter/mrjamesmay/"
+        website="https://apilama.com"
+        mediaCount={1200}
+        followerCount={1200}
+        username="mrJamesMay"
+        order={4}
+      />
     </ol>
   );
 }

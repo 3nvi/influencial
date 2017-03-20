@@ -3,7 +3,7 @@ import {
   CLEAR_FILTERS
 } from '../../actions/types';
 
-export const initialGenderState = 'both';
+export const initialGenderState = 'any';
 
 export default (state = initialGenderState, action) => {
   switch (action.type) {

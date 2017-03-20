@@ -11,3 +11,9 @@
   -o-transition: all #{$s}s ease-in-out;
   transition: all #{$s}s ease-in-out;
 }
+
+@mixin line-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

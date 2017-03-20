@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Cell } from 'react-mdl';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -6,10 +7,8 @@ import _ from 'lodash';
 
 import '../../lib/amcharts/index';
 import { toggleFilter } from '../../actions/index';
-import {
-  ADD_LOCATION_FILTER,
-  REMOVE_LOCATION_FILTER
-} from '../../actions/types';
+import { ADD_LOCATION_FILTER, REMOVE_LOCATION_FILTER } from '../../actions/types';
+import { SERVER_URL } from '../../util';
 
 
 class Map extends Component {
@@ -17,6 +16,7 @@ class Map extends Component {
     super(props);
 
     this.onMapObjectClick = this.onMapObjectClick.bind(this);
+    this.calculateInfluencerHeatMap = this.calculateInfluencerHeatMap.bind(this);
   }
 
   componentDidMount() {
@@ -73,16 +73,16 @@ class Map extends Component {
     window.map = this.map;
   }
 
-  shouldComponentUpdate() {
-    return false;
-  }
-
   componentWillReceiveProps(nextProps) {
     this.map.svgAreas.forEach((area) => {
       const mapObject = this.map.getObjectById(area.id);
       mapObject.showAsSelected = _.includes(nextProps.locations, area.id);
       this.map.returnInitialColor(mapObject);
     });
+  }
+
+  shouldComponentUpdate() {
+    return false;
   }
 
   // Ignore any click not on area
@@ -98,24 +98,35 @@ class Map extends Component {
     );
   }
 
-  calculateInfluencerHeatMap(event) {
-    const map = event.chart;
-    if (map.dataGenerated) {
+  calculateInfluencerHeatMap() {
+    if (this.map.dataGenerated) {
       return;
     }
 
-    if (map.dataProvider.areas.length === 0) {
+    if (this.map.dataProvider.areas.length === 0) {
       setTimeout(this.calculateInfluencerHeatMap, 100);
       return;
     }
 
-    // This line needs to be replaced by an async call
-    for (let i = 0; i < map.dataProvider.areas.length; i += 1) {
-      map.dataProvider.areas[i].value = Math.round(Math.random() * 10000);
+    for (let i = 0; i < this.map.dataProvider.areas.length; i += 1) {
+      this.map.dataProvider.areas[i].value = 0;
     }
 
-    map.dataGenerated = true;
-    map.validateNow();
+    // This line needs to be replaced by an async call
+    axios.get(`${SERVER_URL}map/influencers/`)
+      .then((response) => {
+        for (let i = 0; i < response.data.results.length; i += 1) {
+          const area = this.map.getObjectById(response.data.results[i].country_code);
+          area.value = response.data.results[i].total_influencers;
+        }
+
+        this.map.dataGenerated = true;
+        this.map.validateNow();
+      })
+      .catch((e) => {
+        console.error(e);
+        alert('An error occured while trying to load influencers with map locations');
+      });
   }
 
   render() {

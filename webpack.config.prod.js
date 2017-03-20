@@ -53,28 +53,16 @@ module.exports = {
         use: 'file-loader?name=/images/[name].[ext]?[hash]'
       },
       {
-        test: /\.woff(\?.*)?$/,
-        use: 'url-loader?name=/fonts/[name].[ext]&limit=10000&mimetype=application/font-woff'
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
       },
       {
-        test: /\.woff2(\?.*)?$/,
-        use: 'url-loader?name=/fonts/[name].[ext]&limit=10000&mimetype=application/font-woff2'
-      },
-      {
-        test: /\.ttf(\?.*)?$/,
-        use: 'url-loader?name=/fonts/[name].[ext]&limit=10000&mimetype=application/octet-stream'
-      },
-      {
-        test: /\.eot(\?.*)?$/,
-        use: 'file-loader?name=/fonts/[name].[ext]'
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader'
       },
       {
         test: /\.otf(\?.*)?$/,
         use: 'file-loader?name=/fonts/[name].[ext]&mimetype=application/font-otf'
-      },
-      {
-        test: /\.svg(\?.*)?$/,
-        use: 'url-loader?name=/fonts/[name].[ext]&limit=10000&mimetype=image/svg+xml'
       },
       {
         test: /\.json(\?.*)?$/,

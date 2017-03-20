@@ -4,6 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import 'react-perfect-scrollbar/dist/css/styles.css';
+import 'font-awesome/css/font-awesome.min.css';
 import 'react-mdl/extra/material.css';
 import 'react-mdl/extra/material';
 
