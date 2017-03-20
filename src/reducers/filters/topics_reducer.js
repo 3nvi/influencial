@@ -16,9 +16,12 @@ export default (state = {}, action) => {
     case CREATE_TOPIC:
       return { ...state, [action.payload.title]: _.extend({ checked: true }, action.payload) };
     case UPDATE_TOPIC:
-      return _.extend(
-        _.omit(state, [action.meta.prevTitle]),
-        { [action.payload.title]: _.extend({ checked: true }, action.payload) }
+      return _.mapValues(
+        _.mapKeys(state, (o, key) => (key === action.meta.prevTitle ? action.payload.title : key)),
+        (o, key) => (key === action.payload.title ? _.extend(o, {
+          hashtags: action.payload.hashtags,
+          title: action.payload.title
+        }) : o)
       );
     case DELETE_TOPIC:
       return _.omit(state, [action.payload.title]);
