@@ -4,11 +4,13 @@ import filtersReducer from './filters/index_reducer';
 import modalReducer from './modals';
 import notificationReducer from './notification';
 import influencerReducer from './influencers';
+import CommonReducer from './common';
 
 export default combineReducers({
   form: formReducer,
   modals: modalReducer,
   filters: filtersReducer,
   notification: notificationReducer,
-  influencer: influencerReducer
+  influencer: influencerReducer,
+  common: CommonReducer
 });

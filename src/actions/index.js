@@ -27,17 +27,26 @@ export function removeNotification() {
   return { type: actions.REMOVE_NOTIFICATION };
 }
 
+export function requestedInfluencers(page = 1) {
+  return { type: actions.REQUESTED_INFLUENCER_LIST, payload: page };
+}
+
 export function fetchInfluencers(data) {
-  return (dispatch) => { // ?${constructInfluencerUrlQuery()}
-    axios.get(`${SERVER_URL}influencers/`, {
-      page: data.page
+  return (dispatch) => {
+    dispatch(requestedInfluencers(data.page));
+
+    axios.get(`${SERVER_URL}influencers/?${constructInfluencerUrlQuery()}`, {
+      params: {
+        page: data.page
+      }
     })
     .then((response) => {
       dispatch({
         type: data.type,
         payload: {
           items: response.data.results,
-          page: data.page
+          page: data.page,
+          noMoreResults: response.data.next === null
         }
       });
     })
@@ -48,18 +57,12 @@ export function fetchInfluencers(data) {
   };
 }
 
-function resetInfluencers() {
-  return fetchInfluencers({
-    type: actions.RESET_INFLUENCER_LIST,
-    page: 1
-  });
+export function resetInfluencers() {
+  return fetchInfluencers({ type: actions.RESET_INFLUENCER_LIST });
 }
 
-function updateInfluencers(data) {
-  return fetchInfluencers({
-    type: actions.UPDATE_INFLUENCER_LIST,
-    page: data.page
-  });
+export function updateInfluencers(page) {
+  return fetchInfluencers({ type: actions.UPDATE_INFLUENCER_LIST, page });
 }
 
 export function fetchTopics() {

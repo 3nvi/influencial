@@ -16,6 +16,6 @@ export function constructInfluencerUrlQuery() {
 
   return Object
     .keys(query)
-    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`)
+    .map(key => (!query[key] ? '' : `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`))
     .join('&');
 }

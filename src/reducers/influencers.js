@@ -1,11 +1,35 @@
-import { RESET_INFLUENCER_LIST, UPDATE_INFLUENCER_LIST } from '../actions/types';
+import _ from 'lodash';
+import {
+  REQUESTED_INFLUENCER_LIST,
+  RESET_INFLUENCER_LIST,
+  UPDATE_INFLUENCER_LIST
+} from '../actions/types';
 
-export default (state = { items: [], page: 1 }, action) => {
+const initialState = {
+  items: [],
+  page: 0,
+  noMoreResults: false,
+  isFetching: false
+};
+
+export default (state = initialState, action) => {
   switch (action.type) {
+    case REQUESTED_INFLUENCER_LIST:
+      return { ...state, page: action.payload, isFetching: true };
     case RESET_INFLUENCER_LIST:
-      return { ...state, items: action.payload.items, page: 1 };
+      return {
+        ...state,
+        noMoreResults: action.payload.noMoreResults,
+        items: action.payload.items,
+        isFetching: false
+      };
     case UPDATE_INFLUENCER_LIST:
-      return { ...state, items: [...state.items, action.payload.items], page: action.payload.page };
+      return {
+        ...state,
+        noMoreResults: action.payload.noMoreResults,
+        items: _.concat(state.items, action.payload.items),
+        isFetching: false
+      };
     default:
       return state;
   }
