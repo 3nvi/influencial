@@ -1,16 +1,7 @@
 import axios from 'axios';
 import * as actions from './types';
-import { SERVER_URL } from '../util';
+import { SERVER_URL, constructInfluencerUrlQuery } from '../util';
 
-/* Action creator for toggling the filters state. Different reducers handle payload differently */
-export function toggleFilter(type, payload) {
-  return { type, payload };
-}
-
-/* Action creator for resetting filters to their original state */
-export function clearFilters() {
-  return { type: actions.CLEAR_FILTERS };
-}
 
 export function openTopicCreate() {
   return { type: actions.OPEN_TOPIC_CREATE_MODAL };
@@ -36,11 +27,48 @@ export function removeNotification() {
   return { type: actions.REMOVE_NOTIFICATION };
 }
 
+export function fetchInfluencers(data) {
+  return (dispatch) => { // ?${constructInfluencerUrlQuery()}
+    axios.get(`${SERVER_URL}influencers/`, {
+      page: data.page
+    })
+    .then((response) => {
+      dispatch({
+        type: data.type,
+        payload: {
+          items: response.data.results,
+          page: data.page
+        }
+      });
+    })
+    .catch((error) => {
+      // in case of server error
+      console.error(error);
+    });
+  };
+}
+
+function resetInfluencers() {
+  return fetchInfluencers({
+    type: actions.RESET_INFLUENCER_LIST,
+    page: 1
+  });
+}
+
+function updateInfluencers(data) {
+  return fetchInfluencers({
+    type: actions.UPDATE_INFLUENCER_LIST,
+    page: data.page
+  });
+}
+
 export function fetchTopics() {
   return dispatch => (
     axios.get(`${SERVER_URL}topics/`)
       .then((response) => {
         dispatch({ type: actions.FETCH_TOPIC_LIST, payload: response.data.results });
+
+        dispatch(resetInfluencers());
       })
       .catch((error) => {
         console.error(error);
@@ -55,13 +83,15 @@ export function createTopic(payload) {
       title: payload.title,
       hashtags: payload.hashtags
     })
-    .then((response) => {
-      dispatch({ type: actions.CREATE_TOPIC, payload: response.data });
-      dispatch(addNotification('Topic successfully created!'));
-    })
-    .catch(() => {
-      alert('Sorry couldn\'t create your new topic');
-    });
+      .then((response) => {
+        dispatch({ type: actions.CREATE_TOPIC, payload: response.data });
+        dispatch(addNotification('Topic successfully created!'));
+
+        dispatch(resetInfluencers());
+      })
+      .catch(() => {
+        alert('Sorry couldn\'t create your new topic');
+      });
   };
 }
 
@@ -72,20 +102,22 @@ export function updateTopic(payload) {
       title: payload.title,
       hashtags: payload.hashtags
     })
-    .then((response) => {
-      dispatch({
-        type: actions.UPDATE_TOPIC,
-        payload: response.data,
-        meta: {
-          prevTitle: payload.selectedTopic.title
-        }
+      .then((response) => {
+        dispatch({
+          type: actions.UPDATE_TOPIC,
+          payload: response.data,
+          meta: {
+            prevTitle: payload.selectedTopic.title
+          }
+        });
+        dispatch(addNotification('Topic has been updated successfully!'));
+
+        dispatch(resetInfluencers());
+      })
+      .catch(() => {
+        // in case of server error
+        alert('Sorry, couldn\'t update this topic');
       });
-      dispatch(addNotification('Topic has been updated successfully!'));
-    })
-    .catch(() => {
-      // in case of server error
-      alert('Sorry, couldn\'t update this topic');
-    });
   };
 }
 
@@ -96,10 +128,28 @@ export function deleteTopic(payload) {
       .then(() => {
         dispatch({ type: actions.DELETE_TOPIC, payload });
         dispatch(addNotification(`Topic ${payload.title} deleted`));
+
+        dispatch(resetInfluencers());
       })
       .catch(() => {
         // in case of server error
         alert('Sorry, couldn\'t delete this topic');
       });
+  };
+}
+
+/* Action creator for toggling the filters state. Different reducers handle payload differently */
+export function toggleFilter(type, payload) {
+  return (dispatch) => {
+    dispatch({ type, payload });
+    dispatch(resetInfluencers());
+  };
+}
+
+/* Action creator for resetting filters to their original state */
+export function clearFilters() {
+  return (dispatch) => {
+    dispatch({ type: actions.CLEAR_FILTERS });
+    dispatch(resetInfluencers());
   };
 }

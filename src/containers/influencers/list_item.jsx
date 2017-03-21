@@ -1,31 +1,33 @@
 import React from 'react';
 import { Icon } from 'react-mdl';
+import { Link } from 'react-router';
 
 const humanize = require('humanize');
 
 function InfluencerListItem(props) {
+  const profileUrl = `/profile/${props.id}/`;
   return (
     <li className="influncer-list__item mdl-shadow--2dp">
-      <a href="#">
+      <Link to={profileUrl}>
         <img src={props.image} alt="Random" />
-      </a>
+      </Link>
       <div>
         <h4 className="name">
-          <a href="#">{props.name}</a>
+          <Link to={profileUrl}>{props.name}</Link>
           {props.gender !== null ? <i className="fa fa-mars" /> : false }
         </h4>
         <div className="location">
           <Icon name="place" style={{ marginLeft: '-3px' }} />
-          <span>{props.location}</span>
+          <span>{props.country.name || 'N/A'}</span>
         </div>
         <div className="service">
-          <i className={`fa fa-${props.service.toLowerCase()}`} />
-          <a href={props.serviceURL} rel="noopener noreferrer" target="_blank">
+          <i className={`fa fa-${props.service}`} />
+          <a href={props.service_url} rel="noopener noreferrer" target="_blank">
             @{props.username}
           </a>
 
-          &#8226; <b>{props.followerCount} Followers</b>
-          &#8226; <b>{props.mediaCount} Posts</b>
+          &#8226; <b>{props.follower_count} Followers</b>
+          &#8226; <b>{props.media_count} Posts</b>
         </div>
         <div className="website">
           <Icon name="public" />
@@ -46,16 +48,20 @@ function InfluencerListItem(props) {
 }
 
 InfluencerListItem.propTypes = {
+  id: React.PropTypes.number.isRequired,
   order: React.PropTypes.number.isRequired,
   gender: React.PropTypes.string,
   image: React.PropTypes.string.isRequired,
   name: React.PropTypes.string.isRequired,
   username: React.PropTypes.string.isRequired,
-  location: React.PropTypes.string.isRequired,
+  country: React.PropTypes.shape({
+    code: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string.isRequired
+  }).isRequired,
   service: React.PropTypes.string.isRequired,
-  serviceURL: React.PropTypes.string.isRequired,
-  followerCount: React.PropTypes.number.isRequired,
-  mediaCount: React.PropTypes.number.isRequired,
+  service_url: React.PropTypes.string.isRequired,
+  follower_count: React.PropTypes.number.isRequired,
+  media_count: React.PropTypes.number.isRequired,
   website: React.PropTypes.string.isRequired,
   info: React.PropTypes.string.isRequired
 };

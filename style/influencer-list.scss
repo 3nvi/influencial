@@ -23,6 +23,7 @@
 
       img {
         display: block;
+        width: 100%;
       }
     }
 
@@ -113,6 +114,7 @@
 
     .info {
       max-height: 48px;
+      overflow-y: hidden;
     }
 
     .order {

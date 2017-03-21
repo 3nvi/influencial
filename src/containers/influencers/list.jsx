@@ -1,67 +1,32 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Influencer from './list_item';
+import { PAGINATION_ITEM_COUNT } from '../../util';
 
-function InfluencerList() {
+function InfluencerList(props) {
+  let order = 0;
   return (
     <ol className="influecer-list">
-      <Influencer
-        gender="male"
-        image="http://lorempixel.com/170/170"
-        info="This is a beautiful description with bad grammar of cource fucking grammar Nazi"
-        location="Kurdistan"
-        name="Cara DeLevigne"
-        service="twitter"
-        serviceURL="https://twitter/mrjamesmay/"
-        website="https://apilama.com"
-        mediaCount={1200}
-        followerCount={1200}
-        username="mrJamesMay"
-        order={1}
-      />
-      <Influencer
-        gender="male"
-        image="http://lorempixel.com/170/170"
-        info="This is a beautiful description with bad grammar of cource fucking grammar Nazi"
-        location="Kurdistan"
-        name="Cara DeLevigne"
-        service="twitter"
-        serviceURL="https://twitter/mrjamesmay/"
-        website="https://apilama.com"
-        mediaCount={1200}
-        followerCount={1200}
-        username="mrJamesMay"
-        order={2}
-      />
-      <Influencer
-        gender="male"
-        image="http://lorempixel.com/170/170"
-        info="This is a beautiful description with bad grammar of cource fucking grammar Nazi"
-        location="Kurdistan"
-        name="Cara DeLevigne"
-        service="twitter"
-        serviceURL="https://twitter/mrjamesmay/"
-        website="https://apilama.com"
-        mediaCount={1200}
-        followerCount={1200}
-        username="mrJamesMay"
-        order={3}
-      />
-      <Influencer
-        gender="male"
-        image="http://lorempixel.com/170/170"
-        info="This is a beautiful description with bad grammar of cource fucking grammar Nazi"
-        location="Kurdistan"
-        name="Cara DeLevigne"
-        service="twitter"
-        serviceURL="https://twitter/mrjamesmay/"
-        website="https://apilama.com"
-        mediaCount={1200}
-        followerCount={1200}
-        username="mrJamesMay"
-        order={4}
-      />
+      {
+        props.influencers.map((influencer) => {
+          order += 1;
+          return <Influencer key={order} {...influencer} order={order} />;
+        })
+      }
     </ol>
   );
 }
 
-export default InfluencerList;
+InfluencerList.propTypes = {
+  influencers: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  currentPage: React.PropTypes.number.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    influencers: state.influencer.items,
+    currentPage: state.influencer.page
+  };
+}
+
+export default connect(mapStateToProps)(InfluencerList);
