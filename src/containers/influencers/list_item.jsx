@@ -6,6 +6,7 @@ const humanize = require('humanize');
 
 function InfluencerListItem(props) {
   const profileUrl = `/profile/${props.id}/`;
+  const orderBadge = (props.order) ? <div className="order">{props.order}</div> : false;
   return (
     <li className="influncer-list__item mdl-shadow--2dp">
       <Link to={profileUrl}>
@@ -41,7 +42,7 @@ function InfluencerListItem(props) {
         <p className="info">
           {props.info}
         </p>
-        <div className="order">{props.order}</div>
+        {orderBadge}
       </div>
     </li>
   );

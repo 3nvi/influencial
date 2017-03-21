@@ -13,6 +13,10 @@ html > body {
     font-family: 'Helvetica','Arial',sans-serif;
   }
 
+  .mdl-layout {
+    min-width: 1200px;
+  }
+
   /* grid breakpoints & media */
   .container .mdl-grid {
     margin: auto;
