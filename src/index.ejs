@@ -22,6 +22,7 @@ dynamically so only include persisting stuff like meta, external links, titles e
     This ensures that the proper manifest JS file is loaded as inline,
     in order to avoid unnecessary re-fetching of cached scripts when Webpack generates the versioning hashes
     -->
+    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     <%=htmlWebpackPlugin.files.webpackManifest%>
   </body>
 

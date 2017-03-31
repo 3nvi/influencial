@@ -35,7 +35,7 @@ export function fetchInfluencers(data) {
   return (dispatch) => {
     dispatch(requestedInfluencers(data.page));
 
-    axios.get(`${SERVER_URL}influencers/?${constructInfluencerUrlQuery()}`, {
+    axios.get(`${SERVER_URL}rankings/?${constructInfluencerUrlQuery()}`, {
       params: {
         page: data.page
       }
@@ -155,4 +155,20 @@ export function clearFilters() {
     dispatch({ type: actions.CLEAR_FILTERS });
     dispatch(resetInfluencers());
   };
+}
+
+/* Action creator for initializing the profile of an influencer */
+export function fetchInfluencerDetails(influencerId) {
+  return dispatch => (
+    axios.get(`${SERVER_URL}influencers/${influencerId}/basic-info/`)
+      .then((response) => {
+        dispatch({
+          type: actions.FETCH_INFLUENCER_DETAILS,
+          payload: response.data
+        });
+      })
+      .catch((err) => { console.log(err)
+        alert('An error occured while trying to fetch influencer\'s details');
+      })
+  );
 }

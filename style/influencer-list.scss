@@ -1,134 +1,183 @@
 .influencer-list {
   list-style: none;
   padding: 0;
+}
 
-  .influncer-list__item {
-    width: 100%;
-    display: block;
+.influencer-card {
+  width: 100%;
+  display: block;
+  margin-bottom: 15px;
+  padding: 15px;
+  background: white;
+  box-sizing: border-box;
+
+  &.version--basic {
     height: 200px;
-    margin-bottom: 15px;
-    padding: 15px;
-    background: white;
-    box-sizing: border-box;
-
-    span {
-      text-transform: uppercase;
-      vertical-align: super;
-    }
-
-    & > a {
-      display: inline-block;
-      width: 170px;
-      height: 170px;
-
-      img {
-        display: block;
-        width: 100%;
-      }
-    }
 
     & > div {
-      position: relative;
-      display: inline-block;
       width: calc(100% - 200px);
-      vertical-align: top;
-      padding: 0 15px;
     }
+  }
+
+  &.version--advanced {
+    height: 100%;
+
+    & > div:first-child {
+      width: 66.666666%;
+      border-right: 1px solid #e5e5e5;
+    }
+
+    & > div:last-child {
+      width: 33.333333%;
+    }
+  }
+
+  span {
+    text-transform: uppercase;
+    vertical-align: super;
+  }
+
+  & > a {
+    display: inline-block;
+    width: 170px;
+    height: 170px;
+
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  & > div {
+    height: 100%;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 15px;
+    box-sizing: inherit;
+  }
+
+  i {
+    margin-right: 5px;
+    color: #555;
+
+    &.fa {
+      font-weight: bold;
+    }
+  }
+
+  .name {
+    @include line-ellipsis;
+    margin-top: 0;
+    font-size: 20px;
+    margin-bottom: 5px;
+
+    a {
+      font-size: inherit;
+      color: #555;
+      text-decoration: none;
+      margin-right: 5px;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .location {
+    @include line-ellipsis;
+
+    span {
+      font-size: 13px;
+      font-weight: bold;
+    }
+  }
+
+  .service {
+    @include line-ellipsis;
 
     i {
+      font-size: 21px;
+    }
+
+    b {
+      font-size: 11px;
+      text-transform: uppercase;
+      vertical-align: top;
+      margin: 0 5px;
+    }
+
+    a {
+      color: #3f51b5;
+      font-size: 14px;
+      text-decoration: none;
+      vertical-align: top;
       margin-right: 5px;
-      color: #555;
-
-      &.fa {
-        font-weight: bold;
-      }
     }
 
-    .name {
-      @include line-ellipsis;
-      margin-top: 0;
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .website {
+    margin-bottom: 5px;
+
+    i {
       font-size: 20px;
-      margin-bottom: 5px;
-
-      a {
-        font-size: inherit;
-        color: #555;
-        text-decoration: none;
-        margin-right: 5px;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
+      vertical-align: sub;
     }
 
-    .location {
-      @include line-ellipsis;
+    a {
+      color: #3f51b5;
+      font-size: 14px;
+    }
+  }
 
-      span {
-        font-size: 13px;
-        font-weight: bold;
-      }
+  .info {
+    max-height: 48px;
+    overflow-y: hidden;
+  }
+
+  .order {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    background-color: rgba(63, 81, 181, 0.9);
+    color: white;
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hashtags {
+    max-height: 36px;
+    overflow: hidden;
+
+    span {
+      text-transform: none;
     }
 
-    .service {
-      @include line-ellipsis;
+    & > span {
+      font-weight: 500;
+      pointer-events: none;
+      margin-right: 15px;
+      text-align: center;
+    }
+  }
 
-      i {
-        font-size: 21px;
-      }
+  .rankings {
+    text-align: center;
 
-      b {
-        font-size: 11px;
-        text-transform: uppercase;
-        vertical-align: top;
-        margin: 0 5px;
-      }
-
-      a {
-        color: #3f51b5;
-        font-size: 14px;
-        text-decoration: none;
-        vertical-align: top;
-        margin-right: 5px;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
+    h1 {
+      margin: 0;
     }
 
-    .website {
-      margin-bottom: 5px;
-
-      i {
-        font-size: 20px;
-        vertical-align: sub;
-      }
-
-      a {
-        color: #3f51b5;
-        font-size: 14px;
-      }
-    }
-
-    .info {
-      max-height: 48px;
-      overflow-y: hidden;
-    }
-
-    .order {
-      width: 50px;
-      height: 50px;
-      display: flex;
-      position: absolute;
-      right: -15px;
-      top: -15px;
-      background-color: rgba(63, 81, 181, 0.9);
-      color: white;
-      font-size: 25px;
-      align-items: center;
-      justify-content: center;
+    p {
+      font-size: 14px;
     }
   }
 }

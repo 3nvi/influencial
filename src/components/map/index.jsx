@@ -112,19 +112,17 @@ class Map extends Component {
       this.map.dataProvider.areas[i].value = 0;
     }
 
-    // This line needs to be replaced by an async call
     axios.get(`${SERVER_URL}map/influencers/`)
       .then((response) => {
         for (let i = 0; i < response.data.results.length; i += 1) {
-          const area = this.map.getObjectById(response.data.results[i].country_code);
+          const area = this.map.getObjectById(response.data.results[i].country);
           area.value = response.data.results[i].total_influencers;
         }
 
         this.map.dataGenerated = true;
         this.map.validateNow();
       })
-      .catch((e) => {
-        console.error(e);
+      .catch(() => {
         alert('An error occured while trying to load influencers with map locations');
       });
   }

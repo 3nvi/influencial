@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Infinite from '../../lib/react-infinite';
-import Influencer from './list_item';
+import ProfileCard from './list_item';
 import { updateInfluencers } from '../../actions/index';
 
 class InfluencerList extends Component {
@@ -19,7 +19,6 @@ class InfluencerList extends Component {
   }
 
   render() {
-    let order = 0;
     return (
       <Infinite
         className="influencer-list"
@@ -30,11 +29,11 @@ class InfluencerList extends Component {
         useWindowAsScrollContainer
       >
         {
-          this.props.influencers.map((influencer) => {
-            order += 1;
-            return <Influencer key={influencer.id} {...influencer} order={order} />;
-          })
+          this.props.influencers.map(influencer => (
+            <ProfileCard version="basic" key={influencer.rank} {...influencer} />
+          ))
         }
+
       </Infinite>
     );
   }

@@ -12,9 +12,11 @@ export function constructInfluencerUrlQuery() {
   query.country = filterState.locations.join(',');
   query.service = filterState.services;
   query.topics = _.keys(_.pickBy(filterState.topics, value => value.checked)).join(',');
+  query.period = filterState.periods;
 
+  Object.keys(query).forEach(key => ((query[key] === '') && delete query[key]));
   return Object
     .keys(query)
-    .map(key => (!query[key] ? '' : `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`))
+    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`)
     .join('&');
 }
