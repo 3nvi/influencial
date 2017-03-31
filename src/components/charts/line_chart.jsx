@@ -133,7 +133,7 @@ LineChart.propTypes = {
   extractionVariable: React.PropTypes.string.isRequired
 };
 
-LineChart.propTypes = {
+LineChart.defaultProps = {
   title: 'Influencer Chart'
 };
 

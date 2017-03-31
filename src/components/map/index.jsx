@@ -10,7 +10,6 @@ import { toggleFilter } from '../../actions/index';
 import { ADD_LOCATION_FILTER, REMOVE_LOCATION_FILTER } from '../../actions/types';
 import { SERVER_URL } from '../../util';
 
-
 class Map extends Component {
   constructor(props) {
     super(props);
@@ -21,14 +20,12 @@ class Map extends Component {
 
   componentDidMount() {
     this.map = AmCharts.makeChart('influencer-map', {
-
       type: 'map',
       theme: 'light',
       projection: 'miller',
       fontFamily: 'Roboto',
       fontSize: 14,
       colorSteps: 5,
-
       dataProvider: {
         map: 'worldLow',
         getAreasFromMap: true
@@ -60,17 +57,13 @@ class Map extends Component {
       },
       listeners: [
         {
-          event: 'init',
-          method: this.calculateInfluencerHeatMap
-        },
-        {
           event: 'clickMapObject',
           method: this.onMapObjectClick
         }
       ]
     });
 
-    window.map = this.map;
+    this.calculateInfluencerHeatMap();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -99,19 +92,6 @@ class Map extends Component {
   }
 
   calculateInfluencerHeatMap() {
-    if (this.map.dataGenerated) {
-      return;
-    }
-
-    if (this.map.dataProvider.areas.length === 0) {
-      setTimeout(this.calculateInfluencerHeatMap, 100);
-      return;
-    }
-
-    for (let i = 0; i < this.map.dataProvider.areas.length; i += 1) {
-      this.map.dataProvider.areas[i].value = 0;
-    }
-
     axios.get(`${SERVER_URL}map/influencers/`)
       .then((response) => {
         for (let i = 0; i < response.data.results.length; i += 1) {

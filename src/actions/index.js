@@ -2,7 +2,6 @@ import axios from 'axios';
 import * as actions from './types';
 import { SERVER_URL, constructInfluencerUrlQuery } from '../util';
 
-
 export function openTopicCreate() {
   return { type: actions.OPEN_TOPIC_CREATE_MODAL };
 }
@@ -161,14 +160,15 @@ export function clearFilters() {
 export function fetchInfluencerDetails(influencerId) {
   return dispatch => (
     axios.get(`${SERVER_URL}influencers/${influencerId}/basic-info/`)
-      .then((response) => {
-        dispatch({
-          type: actions.FETCH_INFLUENCER_DETAILS,
-          payload: response.data
-        });
-      })
-      .catch((err) => { console.log(err)
-        alert('An error occured while trying to fetch influencer\'s details');
-      })
+    .then((response) => {
+      dispatch({
+        type: actions.FETCH_INFLUENCER_DETAILS,
+        payload: response.data
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      alert('An error occured while trying to fetch influencer\'s details');
+    })
   );
 }

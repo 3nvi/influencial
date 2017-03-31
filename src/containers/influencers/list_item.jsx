@@ -33,16 +33,28 @@ function InfluencerListItem(props) {
       <p>
         of past Week on <b>{props.influencer.service}</b>
       </p>
-      <p>
-        <b>#{props.influencer.rank[1].rank}</b>
-        <br />
-        of past Month
-      </p>
-      <p>
-        <b>#{props.influencer.rank[2].rank}</b>
-        <br />
-        of past Trimester
-      </p>
+      {
+        props.influencer.rank.length > 1 ? (
+          <p>
+            <b>#{props.influencer.rank[1].rank}</b>
+            <br />
+            of past Month
+          </p>
+        ) : (
+          false
+        )
+      }
+      {
+        props.influencer.rank.length > 2 ? (
+          <p>
+            <b>#{props.influencer.rank[2].rank}</b>
+            <br />
+            of past Trimester
+          </p>
+        ) : (
+          false
+        )
+      }
     </div>
   );
 

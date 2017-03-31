@@ -95,7 +95,7 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  influencer: React.PropTypes.object,
+  influencer: React.PropTypes.shape(),
   fetchInfluencerDetails: React.PropTypes.func.isRequired,
   params: React.PropTypes.shape({
     id: React.PropTypes.string

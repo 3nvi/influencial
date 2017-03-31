@@ -12,7 +12,7 @@ import {
 export default (state = {}, action) => {
   switch (action.type) {
     case FETCH_TOPIC_LIST:
-      return _.mapKeys(_.map(action.payload, o => _.extend({ checked: true }, o)), 'title');
+      return _.mapKeys(_.map(action.payload, o => _.extend({ checked: false }, o)), 'title');
     case CREATE_TOPIC:
       return { ...state, [action.payload.title]: _.extend({ checked: true }, action.payload) };
     case UPDATE_TOPIC:
@@ -33,7 +33,7 @@ export default (state = {}, action) => {
         )
       };
     case CLEAR_FILTERS:
-      return _.mapValues(state, topic => _.extend(topic, { checked: true }));
+      return _.mapValues(state, topic => _.extend(topic, { checked: false }));
     default:
       return state;
   }
