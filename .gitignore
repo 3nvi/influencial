@@ -10,7 +10,6 @@
 # Distribution & Static Asset Folders
 src/static_dist/
 src/static_root/
-dist/
 
 # Python & Django compiled byte code
 *.pyc
