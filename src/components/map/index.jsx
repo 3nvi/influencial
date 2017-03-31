@@ -34,6 +34,7 @@ class Map extends Component {
         autoZoom: false,
         selectable: true,
         color: '#eeeeee',
+        outlineColor: '#bbbbbb',
         colorSolid: '#4457b8',
         rollOverColor: '#eeb38b',
         selectedColor: '#ee8a2d',
@@ -63,7 +64,7 @@ class Map extends Component {
       ]
     });
 
-    this.calculateInfluencerHeatMap();
+    setTimeout(this.calculateInfluencerHeatMap, 100);
   }
 
   componentWillReceiveProps(nextProps) {
