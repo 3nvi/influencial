@@ -10,7 +10,7 @@
     "start": "webpack-dev-server --config ./webpack.config.dev.js",
     "server": "set NODE_ENV=development && node server.js",
     "server:prod": "set NODE_ENV=production && node server.js",
-    "postinstall": "npm run build:prod"
+    "postinstall": "webpack -p --config ./webpack.config.prod.js"
   },
   "repository": "https://github.com/StephenGrider/WebpackProject",
   "author": "",
