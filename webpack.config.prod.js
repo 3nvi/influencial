@@ -49,6 +49,22 @@ module.exports = {
         test: /\.s(a|c)ss$/
       },
       {
+        test: /\.jpe?g$|\.gif$|\.png$/,
+        use: 'file-loader?name=/images/[name].[ext]?[hash]'
+      },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader'
+      },
+      {
+        test: /\.otf(\?.*)?$/,
+        use: 'file-loader?name=/fonts/[name].[ext]&mimetype=application/font-otf'
+      },
+      {
         test: /\.json(\?.*)?$/,
         use: 'file-loader?name=/files/[name].[ext]'
       }
