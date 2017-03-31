@@ -72,7 +72,9 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
     }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest']
@@ -86,6 +88,7 @@ module.exports = {
     new InlineManifestWebpackPlugin({
       name: 'webpackManifest'
     }),
-    new ExtraxtTextPlugin('bundle.[contenthash].css')
+    new ExtraxtTextPlugin('bundle.[contenthash].css'),
+    new webpack.optimize.UglifyJsPlugin()
   ]
 };
