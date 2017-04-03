@@ -11,6 +11,7 @@ class LineChart extends Component {
     super(props);
 
     this.initializeChart = this.initializeChart.bind(this);
+    this.updateInitState = this.updateInitState.bind(this);
     this.state = { chartInitialized: false };
   }
 
@@ -20,6 +21,10 @@ class LineChart extends Component {
         const data = response.data[Object.keys(response.data)[0]];
         const chartDictData = {};
         const chartData = [];
+
+        if (!data.length) {
+          return this.updateInitState();
+        }
 
         // group by date
         data.forEach((item) => {
@@ -51,8 +56,11 @@ class LineChart extends Component {
     return !this.state.chartInitialized;
   }
 
+  updateInitState() {
+    this.setState({ chartInitialized: true });
+  }
+
   initializeChart(chartData, graphNames) {
-    const updateInitState = () => this.setState({ chartInitialized: true });
     this.chart = AmCharts.makeChart(this.props.container, {
       type: 'serial',
       theme: 'light',
@@ -105,7 +113,7 @@ class LineChart extends Component {
       dataProvider: chartData,
       listeners: [{
         event: 'buildStarted',
-        method: updateInitState
+        method: this.updateInitState
       }]
     });
   }
@@ -116,7 +124,14 @@ class LineChart extends Component {
         <h4 className="text-center">{this.props.title}</h4>
         {
           this.state.chartInitialized ? (
-            <div id={this.props.container} style={{ width: '100%', height: '400px' }} />
+            <div
+              id={this.props.container}
+              style={{ width: '100%', minHeight: '400px', maxHeight: '2500px' }}
+            >
+              <h1 className="text-center chart--empty">
+                Sorry, no relevant data found for this Influencer
+              </h1>
+            </div>
           ) : (
             <Spinner />
             )
