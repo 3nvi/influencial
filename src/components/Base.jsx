@@ -7,6 +7,11 @@ function Base(props) {
   return (
     <Layout className="container" style={{ position: 'relative' }}>
       <Header title="InfluenCial" style={{ color: 'white' }}>
+        <img
+          alt="Psymbiosys logo"
+          src="http://www.psymbiosys.eu/wp-content/uploads/2016/08/Psymbiosys_logo.png"
+          width="100px"
+        />
         <Navigation>
           <Link to="/">Home</Link>
         </Navigation>
