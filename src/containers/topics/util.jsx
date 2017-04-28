@@ -5,13 +5,13 @@ import { Textfield } from 'react-mdl';
 import Tokenfield from '../../components/input/tokenfield';
 
 export function topicTextField(props) {
-  const { label, input, meta: { error } } = props;
+  const { label, input, meta: { error, touched } } = props;
   return (
     <Textfield
       {...input}
       label={label}
       floatingLabel
-      error={error || ''}
+      error={(touched && error) ? error : ''}
     />
   );
 }

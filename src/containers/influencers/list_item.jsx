@@ -110,7 +110,7 @@ InfluencerListItem.propTypes = {
     service_url: React.PropTypes.string.isRequired,
     follower_count: React.PropTypes.number.isRequired,
     media_count: React.PropTypes.number.isRequired,
-    website: React.PropTypes.string.isRequired,
+    website: React.PropTypes.string,
     info: React.PropTypes.string.isRequired,
     id: React.PropTypes.number.isRequired,
     rank: React.PropTypes.arrayOf(React.PropTypes.object),
@@ -122,7 +122,10 @@ InfluencerListItem.propTypes = {
 InfluencerListItem.defaultProps = {
   gender: null,
   rank: null,
-  version: 'basic'
+  version: 'basic',
+  influencer: {
+    website: 'N/A'
+  }
 };
 
 export default InfluencerListItem;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
 import _ from 'lodash';
 import { closeTopicModal, createTopic, updateTopic, deleteTopic } from '../../actions/index';
 import ModalForm from './modal-form';
@@ -28,6 +28,13 @@ class TopicCreateOrUpdate extends Component {
   }
 
   handleConfirm(values) {
+    if (!values.title) {
+      throw new SubmissionError({ title: 'You have to specify a topic name' });
+    }
+    if (values.hashtags.indexOf(',') < 0) {
+      throw new SubmissionError({ hashtags: 'You have to press Enter to add a hashtag' });
+    }
+
     const title = values.title;
     const { selectedTopic, operation } = this.props;
     const hashtags = _.initial(values.hashtags.split(','));
