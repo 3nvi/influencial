@@ -7,7 +7,7 @@ function InfluencerListItem(props) {
   const orderBadge = (props.rank) ? <div className="order">{props.rank}</div> : false;
   const profilePicture = (props.version === 'advanced') ? false : (
     <Link to={profileUrl}>
-      <img src={props.influencer.image} alt="Random" />
+      <img src={props.influencer.image} alt="Influencer Image" />
     </Link>
   );
   const genderIcon = ((gender) => {
