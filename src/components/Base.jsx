@@ -14,6 +14,7 @@ function Base(props) {
         />
         <Navigation>
           <Link to="/">Home</Link>
+          <Link to="/privacy-policy">Privacy</Link>
         </Navigation>
       </Header>
       {props.children}

@@ -7,7 +7,7 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 
 function Routes() {
   return (
-    <Router history={hashHistory}>
+    <Router history={browserHistory}>
       <Route path="/" component={Base}>
         <IndexRoute component={Home} />
         <Route path="/profile/:id/" component={Profile} />
