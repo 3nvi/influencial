@@ -1,6 +1,6 @@
 import { TOGGLE_ALGORITHM_FILTER } from '../../actions/types';
 
-const initialState = 'simple';
+const initialState = 'pagerank';
 
 export default (state = initialState, action) => {
   switch (action.type) {
