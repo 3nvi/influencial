@@ -64,7 +64,7 @@ class Map extends Component {
       ]
     });
 
-    setTimeout(this.calculateInfluencerHeatMap, 300);
+    setTimeout(this.calculateInfluencerHeatMap, 500);
   }
 
   componentWillReceiveProps(nextProps) {
