@@ -8,7 +8,7 @@ import GenericSingleValueFiltersHoc from './generic_filter_hoc';
 function SelectFilterComponent(props) {
 
   function renderSelectComponent(inheritedProps) {
-    const { title, items, ...rest } = inheritedProps;
+    const { title, items, value, ...rest } = inheritedProps;
     if (!items.length) {
       return false;
     }
@@ -18,6 +18,7 @@ function SelectFilterComponent(props) {
         label={title}
         className="center-block"
         floatingLabel
+        value={value || items[0]}
         {...rest}
       >
         {items.map(item => <Option value={item} key={item}>{item.split('-').join(' ')}</Option>)}

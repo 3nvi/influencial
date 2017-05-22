@@ -9,6 +9,7 @@ function AlgorithmFilter() {
       title="Select a computational method"
       actionType={TOGGLE_ALGORITHM_FILTER}
       itemsStateName="algorithm"
+      value="pagerank"
       items={['pagerank', 'tweetrank', 'simple']}
     />
   );
